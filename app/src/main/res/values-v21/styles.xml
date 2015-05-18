@@ -1,23 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar.Fullscreen">
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="topSymbols" parent="android:Widget.DeviceDefault.Button.Borderless" >
+    <style name="topSymbols" parent="android:Widget.Material.Button.Borderless" >
         <item name="android:textColor">#fff</item>
         <item name="android:background">#888</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">0.3dp</item>
     </style>
-    <style name="middleNumbers" parent="android:Widget.DeviceDefault.Button.Borderless">
+    <style name="middleNumbers" parent="android:Widget.Material.Button.Borderless">
         <item name="android:textColor">#fff</item>
         <item name="android:background">#ffeaeaea</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">0.3dp</item>
     </style>
-    <style name="rightSymbols" parent="android:Widget.DeviceDefault.Button.Borderless">
+    <style name="rightSymbols" parent="android:Widget.Material.Button.Borderless">
         <item name="android:background">#ff1c90c5</item>
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">#fff</item>
