@@ -22,18 +22,39 @@
     <string name="equal">=</string>
 
     <string name="power">xⁿ</string>
+    <string name="powerTwo">x²</string>
+    <string name="powerThree">x³</string>
+    <string name="twoNd">2ⁿᵈ</string>
+    <string name="twoX">2ˣ</string>
+    <string name="tenX">10ˣ</string>
     <string name="square">ⁿ√x</string>
     <string name="bracketOpen">(</string>
     <string name="bracketClose">)</string>
     <string name="factorial">x!</string>
     <string name="logarithmNat">㏑</string>
-    <string name="logarithm">log</string>
-    <string name="tan">tan</string>
-    <string name="cos">cos</string>
-    <string name="sin">sin</string>
+    <string name="logarithm">log₁₀</string>
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
+
+    <string name="tan">tan</string>
+    <string name="cos">cos</string>
+    <string name="sin">sin</string>
+    <string name="tanh">tanh</string>
+    <string name="cosh">cosh</string>
+    <string name="sinh">sinh</string>
+
+    <string name="floor">⌊</string>
+    <string name="ceiling">⌉</string>
+    <string name="abs">|x|</string>
+
+
+    <string name="pi">π</string>
+    <string name="e">e</string>
+    <string name="ePow">eˣ</string>
+    <string name="rand">Rand</string>
+    <string name="rad">Rad</string>
+
 
 
 </resources>

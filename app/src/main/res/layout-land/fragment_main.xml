@@ -19,15 +19,13 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_gravity="right"
             android:layout_weight="2"
             android:gravity="center_vertical|right"
             android:text="0"
-            android:textSize="40dp"
-            android:textColor="#ffffffff"/>
+            android:textSize="40sp"
+            android:textColor="#ffffffff"
+            android:editable="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,135 +35,354 @@
             android:id="@+id/writeDetail"
             android:layout_weight="1"
             android:gravity="top|right"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="#f2a4a4a4"
-            />
+            android:editable="false"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/bigBlueBox"
+        android:id="@+id/linearLayout"
         android:layout_weight="7"
-        android:background="#ff333333">
+        android:background="#ff333333"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/orangeBox1"
-            android:background="#ff000000"
-            android:layout_weight="1"
-            >
-            <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/power"
-                android:textAllCaps="false"
-                android:id="@+id/buttonPower"
-                style="@style/topSymbols"
-                />
+                android:id="@+id/orangeBox1"
+                android:background="#ff000000"
+                android:layout_weight="1">
 
-            <Button
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/twoNd"
+                    android:textAllCaps="false"
+                    android:id="@+id/button2ND"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonSin"
+                    android:text="@string/sin"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonCos"
+                    android:text="@string/cos"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonTan"
+                    android:text="@string/tan"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonRad"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"
+                    android:text="@string/rad"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAllCaps="false"
-                android:text="@string/square"
-                android:id="@+id/buttonRoot"
-                style="@style/topSymbols"
-                />
+                android:id="@+id/orangeBox2"
+                android:background="#ff000000"
+                android:layout_weight="1">
 
-            <Button
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonBracketOpen"
+                    android:text="@string/bracketOpen"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonSinh"
+                    android:text="@string/sinh"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonCosh"
+                    android:text="@string/cosh"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonTanh"
+                    android:text="@string/tanh"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonEX"
+                    android:text="@string/ePow"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:id="@+id/linearLayout2"
+                android:background="#ff000000"
                 android:layout_weight="1"
-                android:id="@+id/buttonFactorial"
-                android:textAllCaps="false"
-                android:text="@string/factorial"
-                android:capitalize="none"
-                style="@style/topSymbols"
-                />
+                >
 
-            <Button
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/button4"
+                    android:text="@string/bracketClose"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/powerTwo"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonXPowerTwo"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonTenPowX"
+                    android:text="@string/tenX"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonLn"
+                    android:text="@string/logarithmNat"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonE"
+                    android:text="@string/e"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/buttonLn"
-                android:text="@string/logarithmNat"
-                android:elegantTextHeight="false"
-                android:textAllCaps="false"
-                android:capitalize="none"
-                style="@style/topSymbols"
-                />
+                android:id="@+id/linearLayout3"
+                android:background="#ff000000"
+                android:layout_weight="1">
 
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/button11"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"
+                    android:text="@string/floor"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonXPowerThree"
+                    android:text="@string/powerThree"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:text="@string/square"
+                    android:id="@+id/buttonRoot"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonLogarithm"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"
+                    android:text="@string/logarithm"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/button8"
+                    android:textAllCaps="false"
+                    android:text="@string/pi"
+                    android:capitalize="none"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayout4"
+                android:background="#ff000000"
+                android:layout_weight="1">
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/button16"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"
+                    android:text="@string/ceiling"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonXPowerN"
+                    android:text="@string/power"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonTwoPowX"
+                    android:text="@string/twoX"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonFactorial"
+                    android:textAllCaps="false"
+                    android:text="@string/factorial"
+                    android:capitalize="none"/>
+
+                <Button
+                    style="@style/leftSymbols"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/button15"
+                    android:elegantTextHeight="false"
+                    android:textAllCaps="false"
+                    android:capitalize="none"
+                    android:text="@string/rand"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/orangeBox2"
-            android:background="#ff000000"
-            android:layout_weight="1"
-            >
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/buttonSin"
-                android:textAllCaps="false"
-                android:text="@string/sin"
-                style="@style/topSymbols"
-                />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/buttonCos"
-                android:textAllCaps="false"
-                android:text="@string/cos"
-                style="@style/topSymbols"
-                />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/buttonTan"
-                android:textAllCaps="false"
-                android:text="@string/tan"
-                style="@style/topSymbols"
-                />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAllCaps="false"
-                android:id="@+id/buttonLog"
-                android:text="@string/logarithm"
-                style="@style/topSymbols"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#ff000000"
             android:focusableInTouchMode="false"
             android:id="@+id/blackBox"
-            android:layout_weight="5"
-            >
+            android:layout_weight="4">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,49 +390,44 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:id="@+id/greenBox1"
-                android:animationCache="false"
-                >
+                android:animationCache="false">
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonClear"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/clear"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/clear"/>
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonNegation"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/pozNeg"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/pozNeg"/>
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonModulo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/percent"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/percent"/>
 
                 <Button
+                    style="@style/rightSymbols"
                     android:id="@+id/buttonDivision"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/division"
-                    style="@style/rightSymbols"
-                    android:background="#ff1c90c5"
-                    />
+                    android:background="#ff1c90c5"/>
             </LinearLayout>
 
             <LinearLayout
@@ -223,49 +435,44 @@
                 android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1"
-                android:id="@+id/greenBox2"
-                >
+                android:id="@+id/greenBox2">
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonSeven"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/seven"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/seven"/>
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonEight"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/eight"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/eight"/>
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonNine"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/nine"
-                    style="@style/middleNumbers"
-                    />
+                    android:text="@string/nine"/>
 
                 <Button
+                    style="@style/rightSymbols"
                     android:id="@+id/buttonMultiply"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/multiply"
-                    style="@style/rightSymbols"
-                    android:background="#ff1c90c5"
-                    />
+                    android:background="#ff1c90c5"/>
             </LinearLayout>
 
             <LinearLayout
@@ -275,44 +482,40 @@
                 android:layout_weight="1">
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonFour"
-                    style="@style/middleNumbers"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/four"
-                    />
+                    android:text="@string/four"/>
 
                 <Button
+                    style="@style/middleNumbers"
                     android:id="@+id/buttonFive"
-                    style="@style/middleNumbers"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/five"
-                    />
+                    android:text="@string/five"/>
 
                 <Button
-                    android:id="@+id/buttonSix"
                     style="@style/middleNumbers"
+                    android:id="@+id/buttonSix"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/six"
-                    />
+                    android:text="@string/six"/>
 
                 <Button
-                    android:id="@+id/buttonMinus"
                     style="@style/rightSymbols"
+                    android:id="@+id/buttonMinus"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/substraction"
-                    android:background="#ff1c90c5"
-                    />
+                    android:background="#ff1c90c5"/>
             </LinearLayout>
 
             <LinearLayout
@@ -328,8 +531,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/one"
-                    />
+                    android:text="@string/one"/>
 
                 <Button
                     style="@style/middleNumbers"
@@ -359,8 +561,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="+"
-                    android:background="#ff1c90c5"
-                    />
+                    android:background="#ff1c90c5"/>
             </LinearLayout>
 
             <LinearLayout
@@ -371,8 +572,8 @@
                 >
 
                 <Button
-                    android:id="@+id/buttonZero"
                     style="@style/middleNumbers"
+                    android:id="@+id/buttonZero"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
@@ -381,24 +582,24 @@
                     />
 
                 <Button
-                    android:id="@+id/buttonDot"
                     style="@style/middleNumbers"
+                    android:id="@+id/buttonDot"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/dot"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    />
 
                 <Button
-                    android:id="@+id/buttonEqual"
                     style="@style/rightSymbols"
+                    android:id="@+id/buttonEqual"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/equal"
                     android:background="#ff1c90c5"
                     android:gravity="center"/>
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
