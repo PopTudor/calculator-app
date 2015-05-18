@@ -12,7 +12,7 @@
         <item name="android:layout_margin">0.3dp</item>
     </style>
     <style name="middleNumbers" parent="android:Widget.DeviceDefault.Button.Borderless">
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">#ff2d2d2d</item>
         <item name="android:background">#ffeaeaea</item>
         <item name="android:textSize">30sp</item>
         <item name="android:layout_margin">0.3dp</item>
