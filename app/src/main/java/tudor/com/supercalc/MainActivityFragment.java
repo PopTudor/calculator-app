@@ -1,7 +1,7 @@
 package tudor.com.supercalc;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import net.sourceforge.jeval.EvaluationException;
-import net.sourceforge.jeval.Evaluator;
 
 
 /**
@@ -48,7 +45,7 @@ public class MainActivityFragment extends Fragment {
 	private TextView mTextViewResult;
 	private TextView mTextViewDetail;
 
-	private Evaluator mEvaluator;
+
 	public MainActivityFragment() {
 	}
 
@@ -68,97 +65,116 @@ public class MainActivityFragment extends Fragment {
 		mButtonZero = (Button) view.findViewById(R.id.buttonZero);
 		mButtonDot = (Button) view.findViewById(R.id.buttonDot);
 
-		mButtonPlus = (Button)view.findViewById(R.id.buttonPlus);
-		mButtonMinus = (Button)view.findViewById(R.id.buttonMinus);
-		mButtonMultiply = (Button)view.findViewById(R.id.buttonMultiply);
-		mButtonDivision = (Button)view.findViewById(R.id.buttonDivision);
-		mButtonEqual = (Button)view.findViewById(R.id.buttonEqual);
-		mButtonBracketOpen = (Button)view.findViewById(R.id.buttonBracketOpen);
-		mButtonBracketClose = (Button)view.findViewById(R.id.buttonBracketClose);
-		mButtonModulo = (Button)view.findViewById(R.id.buttonModulo);
-		mButtonNegation = (Button)view.findViewById(R.id.buttonNegation);
+		mButtonPlus = (Button) view.findViewById(R.id.buttonPlus);
+		mButtonMinus = (Button) view.findViewById(R.id.buttonMinus);
+		mButtonMultiply = (Button) view.findViewById(R.id.buttonMultiply);
+		mButtonDivision = (Button) view.findViewById(R.id.buttonDivision);
+		mButtonEqual = (Button) view.findViewById(R.id.buttonEqual);
+		mButtonBracketOpen = (Button) view.findViewById(R.id.buttonBracketOpen);
+		mButtonBracketClose = (Button) view.findViewById(R.id.buttonBracketClose);
+		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
+		mButtonNegation = (Button) view.findViewById(R.id.buttonNegation);
 
-		mButtonLogarithm = (Button)view.findViewById(R.id.buttonLogarithm);
-		mButtonFactorial = (Button)view.findViewById(R.id.buttonFactorial);
-		mButtonRoot = (Button)view.findViewById(R.id.buttonRoot);
-		mButtonPower = (Button)view.findViewById(R.id.buttonPower);
+		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
+		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
+		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
+		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
-		mTextViewResult = (TextView)view.findViewById(R.id.textViewResult);
-		mTextViewDetail = (TextView)view.findViewById(R.id.textViewDetail);
+		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
+		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
 
 
-		mEvaluator = new Evaluator();
 		eventsNumbers();
 		eventsOperators();
 		return view;
 	}
 
-	private void eventsNumbers(){
+	private void eventsNumbers() {
 		mButtonOne.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"1");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "1");
 			}
 		});
 		mButtonTwo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"2");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "2");
 			}
 		});
 		mButtonThree.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"3");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "3");
 			}
 		});
 		mButtonFour.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"4");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "4");
 			}
 		});
 		mButtonFive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"5");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "5");
 			}
 		});
 		mButtonSix.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"6");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "6");
 			}
 		});
 		mButtonSeven.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"7");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "7");
 			}
 		});
 		mButtonEight.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"8");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "8");
 			}
 		});
 		mButtonNine.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"9");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "9");
 			}
 		});
 		mButtonZero.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"0");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "0");
 			}
 		});
 
 
-
 	}
-	private void eventsOperators(){
+
+	public static String removeRedundantOperators( String s )
+	{
+		StringBuilder sb = new StringBuilder( s );
+		String operators = "+-*/";
+		int index = 0;
+		while( index < sb.length() - 1 )
+		{
+			char c1 = sb.charAt( index );
+			char c2 = sb.charAt( index + 1 );
+			if( c1 == c2 && operators.indexOf( c1 ) != -1 )
+			{
+				// remove the next character; the end is exclusive
+				sb.delete( index + 1, index + 2 );
+			}
+			else // added 'else' HERE
+				index++;
+		}
+		return sb.toString();
+	}
+
+	private void eventsOperators() {
 		mTextViewDetail.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -167,12 +183,13 @@ public class MainActivityFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				try {
-					String str = mEvaluator.evaluate(s.toString());
-					mTextViewResult.setText(str);
-				} catch (EvaluationException e) {
-					e.printStackTrace();
-				}
+
+//				Expression expression = new Expression(str);
+//				mTextViewResult.setText(expression.eval().toString());
+//				if (result % 1 == 0)
+//					mTextViewResult.setText((int) result + "");
+//				else
+//					mTextViewResult.setText(result + "");
 			}
 
 			@Override
@@ -184,32 +201,37 @@ public class MainActivityFragment extends Fragment {
 		mButtonDot.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+".");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.dot);
 			}
 		});
 
 		mButtonPlus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"+");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str,R.string.plus);
 			}
 		});
 		mButtonMinus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"-");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.minus);
 			}
 		});
 		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"*");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.multiply);
 			}
 		});
 		mButtonDivision.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"/");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str,R.string.division);
 			}
 		});
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
@@ -221,28 +243,49 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"(");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "(");
 			}
 		});
 		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+")");
+				mTextViewDetail.setText(mTextViewDetail.getText() + ")");
 			}
 		});
 		mButtonModulo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText()+"%");
+				mTextViewDetail.setText(mTextViewDetail.getText() + "%");
 			}
 		});
 		mButtonNegation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewResult.setText("-"+mTextViewResult.getText());
+				mTextViewResult.setText("-" + mTextViewResult.getText());
 			}
 		});
 	}
 
+	/**
+	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
+	 * cu operatorul butonului apasat
+	 * @param str stringul de evaluat
+	 * @param operator
+	 */
+	private void checkForMultipleOperators(String str, int operator){
+		if (str!=null && !str.equals(""))
+			switch (str.charAt(str.length()-1)) {
+				case '.':
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0,str.length()-1) + getString(operator));
+					break;
+				default:
+					mTextViewDetail.setText(mTextViewDetail.getText()+getString(operator));
+					break;
+			}
+	}
 
 }

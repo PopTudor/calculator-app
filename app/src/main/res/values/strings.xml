@@ -16,7 +16,7 @@
     <string name="four">4</string>
     <string name="five">5</string>
     <string name="six">6</string>
-    <string name="substraction">-</string>
+    <string name="minus">-</string>
     <string name="zero">0</string>
     <string name="dot">.</string>
     <string name="equal">=</string>
@@ -25,7 +25,7 @@
     <string name="powerTwo">x²</string>
     <string name="powerThree">x³</string>
     <string name="twoNd">2ⁿᵈ</string>
-    <string name="twoX">2ˣ</string>
+    <string name="twoX">2ⁿ</string>
     <string name="tenX">10ˣ</string>
     <string name="square">ⁿ√x</string>
     <string name="bracketOpen">(</string>
