@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
+import static tudor.com.supercalc.PrepareString.prepareStringForMathEval;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -36,6 +41,7 @@ public class MainActivityFragment extends Fragment {
 	private Button mButtonBracketClose;
 	private Button mButtonModulo;
 	private Button mButtonNegation;
+	private Button mButtonClear;
 
 	private Button mButtonLogarithm;
 	private Button mButtonFactorial;
@@ -74,6 +80,7 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketClose = (Button) view.findViewById(R.id.buttonBracketClose);
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
 		mButtonNegation = (Button) view.findViewById(R.id.buttonNegation);
+		mButtonClear = (Button) view.findViewById(R.id.buttonClear);
 
 		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
 		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
@@ -154,21 +161,17 @@ public class MainActivityFragment extends Fragment {
 
 	}
 
-	public static String removeRedundantOperators( String s )
-	{
-		StringBuilder sb = new StringBuilder( s );
+	public static String removeRedundantOperators(String s) {
+		StringBuilder sb = new StringBuilder(s);
 		String operators = "+-*/";
 		int index = 0;
-		while( index < sb.length() - 1 )
-		{
-			char c1 = sb.charAt( index );
-			char c2 = sb.charAt( index + 1 );
-			if( c1 == c2 && operators.indexOf( c1 ) != -1 )
-			{
+		while (index < sb.length() - 1) {
+			char c1 = sb.charAt(index);
+			char c2 = sb.charAt(index + 1);
+			if (c1 == c2 && operators.indexOf(c1) != -1) {
 				// remove the next character; the end is exclusive
-				sb.delete( index + 1, index + 2 );
-			}
-			else // added 'else' HERE
+				sb.delete(index + 1, index + 2);
+			} else // added 'else' HERE
 				index++;
 		}
 		return sb.toString();
@@ -182,14 +185,14 @@ public class MainActivityFragment extends Fragment {
 			}
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-//				Expression expression = new Expression(str);
-//				mTextViewResult.setText(expression.eval().toString());
-//				if (result % 1 == 0)
-//					mTextViewResult.setText((int) result + "");
-//				else
-//					mTextViewResult.setText(result + "");
+			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
+				String s = prepareStringForMathEval(sequence.toString());
+				Expression expression = new ExpressionBuilder(s).build();
+				double d = expression.evaluate();
+				if (d % 1 == 0)
+					mTextViewResult.setText(String.valueOf((int)d));
+				else
+					mTextViewDetail.setText(String.valueOf(d));
 			}
 
 			@Override
@@ -210,7 +213,7 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str,R.string.plus);
+				checkForMultipleOperators(str, R.string.plus);
 			}
 		});
 		mButtonMinus.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +234,7 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str,R.string.division);
+				checkForMultipleOperators(str, R.string.division);
 			}
 		});
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +246,7 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "(");
+				mTextViewDetail.setText(mTextViewDetail.getText()+"(");
 			}
 		});
 		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
@@ -264,26 +267,33 @@ public class MainActivityFragment extends Fragment {
 				mTextViewResult.setText("-" + mTextViewResult.getText());
 			}
 		});
+		mButtonClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTextViewDetail.setText("");
+			}
+		});
 	}
 
 	/**
 	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
 	 * cu operatorul butonului apasat
-	 * @param str stringul de evaluat
+	 *
+	 * @param str      stringul de evaluat
 	 * @param operator
 	 */
-	private void checkForMultipleOperators(String str, int operator){
-		if (str!=null && !str.equals(""))
-			switch (str.charAt(str.length()-1)) {
+	private void checkForMultipleOperators(String str, int operator) {
+		if (str != null && !str.equals(""))
+			switch (str.charAt(str.length() - 1)) {
 				case '.':
 				case '+':
 				case '-':
 				case '*':
 				case '/':
-					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0,str.length()-1) + getString(operator));
+					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
 					break;
 				default:
-					mTextViewDetail.setText(mTextViewDetail.getText()+getString(operator));
+					mTextViewDetail.setText(mTextViewDetail.getText() + getString(operator));
 					break;
 			}
 	}
