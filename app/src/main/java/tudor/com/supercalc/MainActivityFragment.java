@@ -187,12 +187,14 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 				String s = prepareStringForMathEval(sequence.toString());
-				Expression expression = new ExpressionBuilder(s).build();
-				double d = expression.evaluate();
-				if (d % 1 == 0)
-					mTextViewResult.setText(String.valueOf((int)d));
-				else
-					mTextViewDetail.setText(String.valueOf(d));
+				if (!s.equals("") && s!=null) {
+					Expression expression = new ExpressionBuilder(s).build();
+					double d = expression.evaluate();
+					if (d % 1 == 0)
+						mTextViewResult.setText(String.valueOf((int) d));
+					else
+						mTextViewDetail.setText(String.valueOf(d));
+				}
 			}
 
 			@Override
@@ -271,6 +273,7 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				mTextViewDetail.setText("");
+				mTextViewResult.setText("");
 			}
 		});
 	}
