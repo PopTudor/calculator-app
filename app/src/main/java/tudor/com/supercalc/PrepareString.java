@@ -7,9 +7,10 @@ public class PrepareString {
 	public static String prepareStringForMathEval(String str) {
 		String replaced = null;
 
-		if (str.charAt(str.length() - 1) == '(') {
+		if (str.charAt(str.length() - 1) == '(') { // x( , x(y)(
 			str = str.substring(0, str.length() - 1);
 		}
+
 
 		if (str.matches("(\\d+[+\\-*/]*)*\\(+")){ // (x[+-*/])( || 2( => 2 | 222( => 222 | 5+( => 5| 2+3( |2+3+(
 			replaced = str.replaceAll("[+\\-*/]*\\(+", ""); //

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,14 +187,30 @@ public class MainActivityFragment extends Fragment {
 
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
-				String s = prepareStringForMathEval(sequence.toString());
-				if (!s.equals("") && s!=null) {
-					Expression expression = new ExpressionBuilder(s).build();
-					double d = expression.evaluate();
-					if (d % 1 == 0)
-						mTextViewResult.setText(String.valueOf((int) d));
-					else
-						mTextViewDetail.setText(String.valueOf(d));
+				String s = (sequence.toString());
+				try {
+					if (!s.equals("") && s != null) {
+						Expression expression = new ExpressionBuilder(s).build();
+						double d = expression.evaluate();
+						if (d % 1 == 0)
+							mTextViewResult.setText((int) d + "");
+						else
+							mTextViewResult.setText(String.format("%.5f",d));
+					}
+				}catch (Exception e){
+					try{
+						if (!s.equals("") && s != null) {
+							Expression expression = new ExpressionBuilder(prepareStringForMathEval(s)).build();
+							Log.d("TAG", s);
+							double d = expression.evaluate();
+							if (d % 1 == 0)
+								mTextViewResult.setText(String.valueOf((int) d));
+							else
+								mTextViewResult.setText(String.format("%.5f",d));
+						}
+					}catch (Exception ex) {
+						mTextViewResult.setText("Error");
+					}
 				}
 			}
 
