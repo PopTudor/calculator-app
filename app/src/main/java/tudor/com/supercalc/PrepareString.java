@@ -4,6 +4,7 @@ package tudor.com.supercalc;
  * Created by Tudor on 21-May-15.
  */
 public class PrepareString {
+	
 	public static String prepareStringForMathEval(String str) {
 		String replaced = null;
 
@@ -61,6 +62,9 @@ public class PrepareString {
 		}
 	}
 
-
+	public static String operatorMapping(String expression){
+		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
+		return tmp;
+	}
 
 }

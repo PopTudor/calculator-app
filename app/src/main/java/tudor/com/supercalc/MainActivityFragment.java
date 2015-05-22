@@ -188,6 +188,7 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 				String s = (sequence.toString());
+				s = PrepareString.operatorMapping(s);
 				try {
 					if (!s.equals("") && s != null) {
 						Expression expression = new ExpressionBuilder(s).build();

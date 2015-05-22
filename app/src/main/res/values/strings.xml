@@ -8,10 +8,8 @@
     <string name="plus">+</string>
     <string name="modulo">%</string>
 
-    <string name="division">/</string>
-    <string name="multiply">*</string>
-    <string name="divisionNice">÷</string>
-    <string name="multiplyNice">×</string>
+    <string name="division">÷</string>
+    <string name="multiply">×</string>
 
     <string name="seven">7</string>
     <string name="eight">8</string>
