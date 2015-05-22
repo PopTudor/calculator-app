@@ -196,13 +196,17 @@ public class MainActivityFragment extends Fragment {
 				if (!s.equals("") && s != null) {
 					Expression expression;
 					try { // try default evaluation
-						 expression = new ExpressionBuilder(s).build();
-						BigDecimal d = new BigDecimal(expression.evaluate()).setScale(5,BigDecimal.ROUND_UP).stripTrailingZeros();
+						expression = new ExpressionBuilder(s).build();
+						BigDecimal d = new BigDecimal(expression.evaluate())
+								.setScale(5,BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
+								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
 						mTextViewResult.setText(d.toString());
 					}catch (IllegalArgumentException e) { // if default fails
 						try { // parse the string and try again
 							expression = new ExpressionBuilder(prepareStringForMathEval(s)).build();
-							BigDecimal d = new BigDecimal(expression.evaluate()).setScale(5,BigDecimal.ROUND_UP).stripTrailingZeros();
+							BigDecimal d = new BigDecimal(expression.evaluate())
+									.setScale(5,BigDecimal.ROUND_HALF_UP)
+									.stripTrailingZeros();
 							mTextViewResult.setText(d.toString());
 						} catch (IllegalArgumentException ex) {
 							mTextViewResult.setText("");
