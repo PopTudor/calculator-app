@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 import static tudor.com.supercalc.PrepareString.prepareStringForMathEval;
 
@@ -189,28 +193,22 @@ public class MainActivityFragment extends Fragment {
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 				String s = (sequence.toString());
 				s = PrepareString.operatorMapping(s);
-				try {
-					if (!s.equals("") && s != null) {
-						Expression expression = new ExpressionBuilder(s).build();
-						double d = expression.evaluate();
-						if (d % 1 == 0)
-							mTextViewResult.setText((int) d + "");
-						else
-							mTextViewResult.setText(String.format("%.5f",d));
-					}
-				}catch (Exception e){
-					try{
-						if (!s.equals("") && s != null) {
-							Expression expression = new ExpressionBuilder(prepareStringForMathEval(s)).build();
-							Log.d("TAG", s);
-							double d = expression.evaluate();
-							if (d % 1 == 0)
-								mTextViewResult.setText(String.valueOf((int) d));
-							else
-								mTextViewResult.setText(String.format("%.5f",d));
+				if (!s.equals("") && s != null) {
+					Expression expression;
+					try { // try default evaluation
+						 expression = new ExpressionBuilder(s).build();
+						BigDecimal d = new BigDecimal(expression.evaluate()).setScale(5,BigDecimal.ROUND_UP).stripTrailingZeros();
+						mTextViewResult.setText(d.toString());
+					}catch (IllegalArgumentException e) { // if default fails
+						try { // parse the string and try again
+							expression = new ExpressionBuilder(prepareStringForMathEval(s)).build();
+							BigDecimal d = new BigDecimal(expression.evaluate()).setScale(5,BigDecimal.ROUND_UP).stripTrailingZeros();
+							mTextViewResult.setText(d.toString());
+						} catch (IllegalArgumentException ex) {
+							mTextViewResult.setText("");
+						}catch (Exception e1) {
+							mTextViewResult.setText("Error");
 						}
-					}catch (Exception ex) {
-						mTextViewResult.setText("Error");
 					}
 				}
 			}
@@ -310,7 +308,9 @@ public class MainActivityFragment extends Fragment {
 				case '+':
 				case '-':
 				case '*':
+				case '×':
 				case '/':
+				case '÷':
 					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
 					break;
 				default:
