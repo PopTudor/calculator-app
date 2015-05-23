@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.function.Function;
+import net.objecthunter.exp4j.operator.Operator;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 import static tudor.com.supercalc.PrepareString.prepareStringForMathEval;
 
@@ -98,7 +98,252 @@ public class MainActivityFragment extends Fragment {
 
 		eventsNumbers();
 		eventsOperators();
+
 		return view;
+	}
+
+
+	public static String removeRedundantOperators(String s) {
+		StringBuilder sb = new StringBuilder(s);
+		String operators = "+-*/";
+		int index = 0;
+		while (index < sb.length() - 1) {
+			char c1 = sb.charAt(index);
+			char c2 = sb.charAt(index + 1);
+			if (c1 == c2 && operators.indexOf(c1) != -1) {
+				// remove the next character; the end is exclusive
+				sb.delete(index + 1, index + 2);
+			} else // added 'else' HERE
+				index++;
+		}
+		return sb.toString();
+	}
+
+	private void eventsOperators() {
+		mTextViewDetail.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
+				String s = (sequence.toString());
+				s = PrepareString.operatorMapping(s);
+
+				if (!s.equals("") && s != null) {
+					Expression expression;
+					//todo move these in a new class
+					Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+						@Override
+						public double apply(double... args) {
+							final int arg = (int) args[0];
+							if ((double) arg != args[0]) {
+								throw new IllegalArgumentException("Operand for factorial has to be an integer");
+							}
+							if (arg < 0) {
+								throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+							}
+							double result = 1;
+							for (int i = 1; i <= arg; i++)
+								result *= i;
+							return result;
+						}
+					};
+					Function log = new Function("log", 1) {
+						@Override
+						public double apply(double... args) {
+							return Math.log10(args[0]);
+						}
+					};
+					Function ln = new Function("ln", 1) {
+						@Override
+						public double apply(double... args) {
+							return Math.log(args[0]);
+						}
+					};
+
+					try { // try default evaluation
+						expression = new ExpressionBuilder(s)
+								.operator(factorial)
+								.function(log)
+								.function(ln)
+								.build();
+						BigDecimal d = new BigDecimal(expression.evaluate())
+								.setScale(5, BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
+								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
+						mTextViewResult.setText(d.toPlainString());
+
+					} catch (IllegalArgumentException e) { // if default fails
+						try { // parse the string and try again
+
+							expression = new ExpressionBuilder(prepareStringForMathEval(s))
+									.operator(factorial)
+									.function(log)
+									.function(ln)
+									.build();
+							BigDecimal d = new BigDecimal(expression.evaluate())
+									.setScale(5, BigDecimal.ROUND_HALF_UP)
+									.stripTrailingZeros();
+							mTextViewResult.setText(d.toPlainString());
+
+						} catch (IllegalArgumentException ex) {
+							mTextViewResult.setText("");
+						}
+					} catch (Exception e1) {
+						mTextViewResult.setText("Error");
+					}
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+		mTextViewDetail.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return false;
+			}
+		});
+
+		mButtonDot.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.dot);
+			}
+		});
+
+		mButtonPlus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.plus);
+			}
+		});
+		mButtonMinus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.minus);
+			}
+		});
+		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.multiply);
+			}
+		});
+		mButtonDivision.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.division);
+			}
+		});
+
+		mButtonModulo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.modulo);
+			}
+		});
+
+		mButtonPower.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + "^");
+			}
+		});
+
+		mButtonFactorial.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + "!");
+			}
+		});
+
+		mButtonLogarithm.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + "log(");
+			}
+		});
+
+		mButtonEqual.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTextViewDetail.setText(mTextViewDetail.getText() + "(");
+			}
+		});
+
+		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTextViewDetail.setText(mTextViewDetail.getText() + ")");
+			}
+		});
+
+		mButtonNegation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				char charAtZero = mTextViewResult.getText().charAt(0);
+				if (charAtZero != '-')
+					mTextViewResult.setText("-" + mTextViewResult.getText());
+				else if (charAtZero == '-')
+					mTextViewResult.setText(mTextViewResult.getText().subSequence(1, mTextViewResult.getText().length()));
+			}
+		});
+
+		mButtonClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTextViewDetail.setText("");
+				mTextViewResult.setText("");
+			}
+		});
+	}
+
+
+	/**
+	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
+	 * cu operatorul butonului apasat
+	 *
+	 * @param str      stringul de evaluat
+	 * @param operator
+	 */
+	private void checkForMultipleOperators(String str, int operator) {
+		if (str != null && !str.equals(""))
+			switch (str.charAt(str.length() - 1)) {
+				case '.':
+				case '+':
+				case '%':
+				case '-':
+				case '*':
+				case '×':
+				case '/':
+				case '÷':
+					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
+					break;
+				default:
+					mTextViewDetail.setText(mTextViewDetail.getText() + getString(operator));
+					break;
+			}
 	}
 
 	private void eventsNumbers() {
@@ -162,172 +407,6 @@ public class MainActivityFragment extends Fragment {
 				mTextViewDetail.setText(mTextViewDetail.getText() + "0");
 			}
 		});
-
-
-	}
-
-	public static String removeRedundantOperators(String s) {
-		StringBuilder sb = new StringBuilder(s);
-		String operators = "+-*/";
-		int index = 0;
-		while (index < sb.length() - 1) {
-			char c1 = sb.charAt(index);
-			char c2 = sb.charAt(index + 1);
-			if (c1 == c2 && operators.indexOf(c1) != -1) {
-				// remove the next character; the end is exclusive
-				sb.delete(index + 1, index + 2);
-			} else // added 'else' HERE
-				index++;
-		}
-		return sb.toString();
-	}
-
-	private void eventsOperators() {
-		mTextViewDetail.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
-				String s = (sequence.toString());
-				s = PrepareString.operatorMapping(s);
-				if (!s.equals("") && s != null) {
-					Expression expression;
-					try { // try default evaluation
-						expression = new ExpressionBuilder(s).build();
-						BigDecimal d = new BigDecimal(expression.evaluate())
-								.setScale(5,BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
-								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
-						mTextViewResult.setText(d.toString());
-					}catch (IllegalArgumentException e) { // if default fails
-						try { // parse the string and try again
-							expression = new ExpressionBuilder(prepareStringForMathEval(s)).build();
-							BigDecimal d = new BigDecimal(expression.evaluate())
-									.setScale(5,BigDecimal.ROUND_HALF_UP)
-									.stripTrailingZeros();
-							mTextViewResult.setText(d.toString());
-						} catch (IllegalArgumentException ex) {
-							mTextViewResult.setText("");
-						}catch (Exception e1) {
-							mTextViewResult.setText("Error");
-						}
-					}
-				}
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-		});
-
-		mButtonDot.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.dot);
-			}
-		});
-
-		mButtonPlus.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.plus);
-			}
-		});
-		mButtonMinus.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.minus);
-			}
-		});
-		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.multiply);
-			}
-		});
-		mButtonDivision.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.division);
-			}
-		});
-		mButtonEqual.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				mTextViewDetail.setText(mTextViewDetail.getText()+"(");
-			}
-		});
-		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + ")");
-			}
-		});
-		mButtonModulo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.modulo);
-			}
-		});
-		mButtonNegation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				char charAtZero = mTextViewResult.getText().charAt(0);
-				if (charAtZero != '-')
-					mTextViewResult.setText("-" + mTextViewResult.getText());
-				else if (charAtZero == '-')
-					mTextViewResult.setText(mTextViewResult.getText().subSequence(1,mTextViewResult.getText().length()));
-			}
-		});
-		mButtonClear.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mTextViewDetail.setText("");
-				mTextViewResult.setText("");
-			}
-		});
-	}
-
-	/**
-	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
-	 * cu operatorul butonului apasat
-	 *
-	 * @param str      stringul de evaluat
-	 * @param operator
-	 */
-	private void checkForMultipleOperators(String str, int operator) {
-		if (str != null && !str.equals(""))
-			switch (str.charAt(str.length() - 1)) {
-				case '.':
-				case '+':
-				case '%':
-				case '-':
-				case '*':
-				case '×':
-				case '/':
-				case '÷':
-					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
-					break;
-				default:
-					mTextViewDetail.setText(mTextViewDetail.getText() + getString(operator));
-					break;
-			}
 	}
 
 }
