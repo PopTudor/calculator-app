@@ -268,6 +268,7 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				mTextViewDetail.setText(mTextViewDetail.getText()+"(");
 			}
 		});
@@ -280,13 +281,18 @@ public class MainActivityFragment extends Fragment {
 		mButtonModulo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "%");
+				String str = mTextViewDetail.getText().toString();
+				checkForMultipleOperators(str, R.string.modulo);
 			}
 		});
 		mButtonNegation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewResult.setText("-" + mTextViewResult.getText());
+				char charAtZero = mTextViewResult.getText().charAt(0);
+				if (charAtZero != '-')
+					mTextViewResult.setText("-" + mTextViewResult.getText());
+				else if (charAtZero == '-')
+					mTextViewResult.setText(mTextViewResult.getText().subSequence(1,mTextViewResult.getText().length()));
 			}
 		});
 		mButtonClear.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +316,7 @@ public class MainActivityFragment extends Fragment {
 			switch (str.charAt(str.length() - 1)) {
 				case '.':
 				case '+':
+				case '%':
 				case '-':
 				case '*':
 				case '×':
