@@ -2,7 +2,7 @@
     <string name="app_name">SuperCalc</string>
     <string name="action_settings">Settings</string>
 
-    <string name="clear">C</string>
+    <string name="clear">DEL</string>
     <string name="pozNeg">±</string>
     <string name="plus">+</string>
     <string name="minus">-</string>

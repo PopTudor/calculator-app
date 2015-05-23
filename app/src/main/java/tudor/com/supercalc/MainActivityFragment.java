@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,7 +46,6 @@ public class MainActivityFragment extends Fragment {
 	private Button mButtonBracketOpen;
 	private Button mButtonBracketClose;
 	private Button mButtonModulo;
-	private Button mButtonNegation;
 	private Button mButtonClear;
 
 	private Button mButtonLogarithm;
@@ -84,7 +84,6 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen = (Button) view.findViewById(R.id.buttonBracketOpen);
 		mButtonBracketClose = (Button) view.findViewById(R.id.buttonBracketClose);
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
-		mButtonNegation = (Button) view.findViewById(R.id.buttonNegation);
 		mButtonClear = (Button) view.findViewById(R.id.buttonClear);
 
 		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
@@ -131,38 +130,38 @@ public class MainActivityFragment extends Fragment {
 				String s = (sequence.toString());
 				s = PrepareString.operatorMapping(s);
 
+				//todo move these in a new class
+				Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+					@Override
+					public double apply(double... args) {
+						final int arg = (int) args[0];
+						if ((double) arg != args[0]) {
+							throw new IllegalArgumentException("Operand for factorial has to be an integer");
+						}
+						if (arg < 0) {
+							throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+						}
+						double result = 1;
+						for (int i = 1; i <= arg; i++)
+							result *= i;
+						return result;
+					}
+				};
+				Function log = new Function("log", 1) {
+					@Override
+					public double apply(double... args) {
+						return Math.log10(args[0]);
+					}
+				};
+				Function ln = new Function("ln", 1) {
+					@Override
+					public double apply(double... args) {
+						return Math.log(args[0]);
+					}
+				};
+
 				if (!s.equals("") && s != null) {
 					Expression expression;
-					//todo move these in a new class
-					Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
-						@Override
-						public double apply(double... args) {
-							final int arg = (int) args[0];
-							if ((double) arg != args[0]) {
-								throw new IllegalArgumentException("Operand for factorial has to be an integer");
-							}
-							if (arg < 0) {
-								throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
-							}
-							double result = 1;
-							for (int i = 1; i <= arg; i++)
-								result *= i;
-							return result;
-						}
-					};
-					Function log = new Function("log", 1) {
-						@Override
-						public double apply(double... args) {
-							return Math.log10(args[0]);
-						}
-					};
-					Function ln = new Function("ln", 1) {
-						@Override
-						public double apply(double... args) {
-							return Math.log(args[0]);
-						}
-					};
-
 					try { // try default evaluation
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
@@ -193,7 +192,8 @@ public class MainActivityFragment extends Fragment {
 					} catch (Exception e1) {
 						mTextViewResult.setText("Error");
 					}
-				}
+				}else
+					mTextViewResult.setText("");
 			}
 
 			@Override
@@ -299,22 +299,21 @@ public class MainActivityFragment extends Fragment {
 			}
 		});
 
-		mButtonNegation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				char charAtZero = mTextViewResult.getText().charAt(0);
-				if (charAtZero != '-')
-					mTextViewResult.setText("-" + mTextViewResult.getText());
-				else if (charAtZero == '-')
-					mTextViewResult.setText(mTextViewResult.getText().subSequence(1, mTextViewResult.getText().length()));
-			}
-		});
-
 		mButtonClear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String s = mTextViewDetail.getText().toString();
+				String s1 = mTextViewResult.getText().toString();
+				if (s.length()>0)
+					mTextViewDetail.setText(s.substring(0, s.length() - 1));
+			}
+		});
+		mButtonClear.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
 				mTextViewDetail.setText("");
 				mTextViewResult.setText("");
+				return false;
 			}
 		});
 	}
