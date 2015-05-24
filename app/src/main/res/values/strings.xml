@@ -35,7 +35,7 @@
     <string name="bracketOpen">(</string>
     <string name="bracketClose">)</string>
     <string name="factorial">!</string>
-    <string name="logarithmNat">㏑</string>
+    <string name="logarithmNat">ln</string>
     <string name="logarithm">log</string>
 
 

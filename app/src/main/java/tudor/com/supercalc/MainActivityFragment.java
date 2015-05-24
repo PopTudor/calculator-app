@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,12 +45,16 @@ public class MainActivityFragment extends Fragment {
 	private Button mButtonBracketOpen;
 	private Button mButtonBracketClose;
 	private Button mButtonModulo;
-	private Button mButtonClear;
+	private Button mButtonDel;
 
 	private Button mButtonLogarithm;
+	private Button mButtonLogarithmNat;
 	private Button mButtonFactorial;
 	private Button mButtonRoot;
 	private Button mButtonPower;
+
+	private Button mButtonPi;
+	private Button mButtonE;
 
 	private TextView mTextViewResult;
 	private TextView mTextViewDetail;
@@ -84,12 +87,17 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen = (Button) view.findViewById(R.id.buttonBracketOpen);
 		mButtonBracketClose = (Button) view.findViewById(R.id.buttonBracketClose);
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
-		mButtonClear = (Button) view.findViewById(R.id.buttonClear);
+		mButtonDel = (Button) view.findViewById(R.id.buttonClear);
 
 		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
-		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
+		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);// todo
+		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot); // todo
+		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial); // todo x!y => (x!)y
 		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
+
+		mButtonPi = (Button) view.findViewById(R.id.buttonPi); // todo
+		mButtonE = (Button) view.findViewById(R.id.buttonE); // todo
 
 		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
 		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
@@ -99,23 +107,6 @@ public class MainActivityFragment extends Fragment {
 		eventsOperators();
 
 		return view;
-	}
-
-
-	public static String removeRedundantOperators(String s) {
-		StringBuilder sb = new StringBuilder(s);
-		String operators = "+-*/";
-		int index = 0;
-		while (index < sb.length() - 1) {
-			char c1 = sb.charAt(index);
-			char c2 = sb.charAt(index + 1);
-			if (c1 == c2 && operators.indexOf(c1) != -1) {
-				// remove the next character; the end is exclusive
-				sb.delete(index + 1, index + 2);
-			} else // added 'else' HERE
-				index++;
-		}
-		return sb.toString();
 	}
 
 	private void eventsOperators() {
@@ -162,7 +153,10 @@ public class MainActivityFragment extends Fragment {
 
 				if (!s.equals("") && s != null) {
 					Expression expression;
+
 					try { // try default evaluation
+						s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
+						s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
 								.function(log)
@@ -192,20 +186,13 @@ public class MainActivityFragment extends Fragment {
 					} catch (Exception e1) {
 						mTextViewResult.setText("Error");
 					}
-				}else
+				} else
 					mTextViewResult.setText("");
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
 
-			}
-		});
-
-		mTextViewDetail.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return false;
 			}
 		});
 
@@ -278,6 +265,29 @@ public class MainActivityFragment extends Fragment {
 			}
 		});
 
+		mButtonLogarithmNat.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + "ln(");
+			}
+		});
+
+		mButtonPi.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + getString(R.string.pi));
+			}
+		});
+		mButtonE.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + getString(R.string.e));
+			}
+		});
+
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -299,16 +309,16 @@ public class MainActivityFragment extends Fragment {
 			}
 		});
 
-		mButtonClear.setOnClickListener(new View.OnClickListener() {
+		mButtonDel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String s = mTextViewDetail.getText().toString();
 				String s1 = mTextViewResult.getText().toString();
-				if (s.length()>0)
+				if (s.length() > 0)
 					mTextViewDetail.setText(s.substring(0, s.length() - 1));
 			}
 		});
-		mButtonClear.setOnLongClickListener(new View.OnLongClickListener() {
+		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
 				mTextViewDetail.setText("");

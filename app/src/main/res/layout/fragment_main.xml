@@ -20,13 +20,20 @@
                 android:layout_gravity="right"
                 android:layout_weight="2"
                 android:gravity="center_vertical|right"
-                android:textSize="80sp"
+                android:textSize="50sp"
                 android:textColor="#ffffffff"
-                android:inputType="text"
+                android:inputType="textNoSuggestions|text"
                 android:maxLines="1"
                 android:lines="1"
                 android:singleLine="true"
-                android:maxLength="15"/>
+                android:maxLength="15"
+                android:hapticFeedbackEnabled="false"
+                android:textIsSelectable="false"
+                android:textColorHighlight="@android:color/transparent"
+                android:textColorLink="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textStyle="normal"
+                android:selectAllOnFocus="false"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,7 +42,7 @@
                 android:id="@+id/textViewResult"
                 android:layout_weight="1"
                 android:gravity="top|right"
-                android:textSize="60sp"
+                android:textSize="30sp"
                 android:textColor="#f2a4a4a4"
                 android:linksClickable="false"
                 android:inputType="text"
@@ -66,17 +73,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/twoNd"
+                android:text="@string/e"
                 android:textAllCaps="false"
-                android:id="@+id/button2"/>
+                android:id="@+id/buttonE"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/power"
+                android:text="@string/pi"
                 android:textAllCaps="false"
-                android:id="@+id/buttonPower"
+                android:id="@+id/buttonPi"
                 style="@style/leftSymbols"
                 />
 
@@ -139,11 +146,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/buttonTwoPowN"
-                android:text="@string/twoX"
+                android:id="@+id/buttonLogarithmNat"
+                android:text="@string/logarithmNat"
                 android:elegantTextHeight="false"
                 android:textAllCaps="false"
-                android:capitalize="none"/>
+                android:capitalize="none"
+                android:inputType="textNoSuggestions|text"/>
 
             <Button
                 style="@style/leftSymbols"
@@ -194,6 +202,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/modulo"
+                    style="@style/middleNumbers"
+                    />
+
+                <Button
+                    android:id="@+id/buttonPower"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/power"
                     style="@style/middleNumbers"
                     />
 

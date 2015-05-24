@@ -7,6 +7,9 @@ public class PrepareString {
 	
 	public static String prepareStringForMathEval(String str) {
 		String replaced = null;
+//		str = str.replaceAll("π", String.format("(%0.10f)",Math.PI));
+//		str = str.replaceAll("e", String.format("(%0.10f)",Math.E));
+
 
 		if (str.matches("(\\d+[+\\-*/]*)*\\)*\\(+")){ // (x[+-*/])( || 2( => 2 | 222( => 222 | 5+( => 5| 2+3( |2+3+(
 			replaced = str.replaceAll("[+\\-*/]*\\(+", ""); //
@@ -60,6 +63,22 @@ public class PrepareString {
 	public static String operatorMapping(String expression){
 		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
 		return tmp;
+	}
+
+	public static String removeRedundantOperators(String s) {
+		StringBuilder sb = new StringBuilder(s);
+		String operators = "+-*/";
+		int index = 0;
+		while (index < sb.length() - 1) {
+			char c1 = sb.charAt(index);
+			char c2 = sb.charAt(index + 1);
+			if (c1 == c2 && operators.indexOf(c1) != -1) {
+				// remove the next character; the end is exclusive
+				sb.delete(index + 1, index + 2);
+			} else // added 'else' HERE
+				index++;
+		}
+		return sb.toString();
 	}
 
 }
