@@ -31,7 +31,7 @@
     <string name="twoNd">2ⁿᵈ</string>
     <string name="twoX">2ⁿ</string>
     <string name="tenX">10ˣ</string>
-    <string name="square">√</string>
+    <string name="root">√</string>
     <string name="bracketOpen">(</string>
     <string name="bracketClose">)</string>
     <string name="factorial">!</string>

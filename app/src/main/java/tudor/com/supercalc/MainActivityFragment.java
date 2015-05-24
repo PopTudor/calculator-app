@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -94,7 +92,6 @@ public class MainActivityFragment extends Fragment {
 		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
 		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
 		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial); // todo x!y => (x!)y
-		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
 		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
@@ -156,6 +153,7 @@ public class MainActivityFragment extends Fragment {
 					Expression expression;
 					s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
 					s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
+					s = s.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");
 					try { // try default evaluation
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
@@ -246,7 +244,15 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + "^");
+				checkForMultipleOperators(str, R.string.power);
+			}
+		});
+
+		mButtonRoot.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String str = mTextViewDetail.getText().toString();
+				mTextViewDetail.setText(str + getString(R.string.root));
 			}
 		});
 
@@ -254,7 +260,7 @@ public class MainActivityFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + "!");
+				checkForMultipleOperators(str, R.string.factorial);
 			}
 		});
 
@@ -329,7 +335,6 @@ public class MainActivityFragment extends Fragment {
 		});
 	}
 
-
 	/**
 	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
 	 * cu operatorul butonului apasat
@@ -345,6 +350,8 @@ public class MainActivityFragment extends Fragment {
 				case '%':
 				case '-':
 				case '*':
+				case '^':
+				case '!':
 				case '×':
 				case '/':
 				case '÷':

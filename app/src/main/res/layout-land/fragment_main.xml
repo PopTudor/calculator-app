@@ -284,7 +284,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textAllCaps="false"
-                    android:text="@string/square"
+                    android:text="@string/root"
                     android:id="@+id/buttonRoot"/>
 
                 <Button

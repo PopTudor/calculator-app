@@ -8,7 +8,9 @@ public class PrepareString {
 	public static String prepareStringForMathEval(String str) {
 		String replaced = null;
 
-		str = str.replaceAll("(\\d+!)", "($1)");
+		if (str.matches("(\\d+!)"))
+			str = str.replaceAll("(\\d+!)", "($1)");
+
 
 		if (str.matches("(\\d+[+\\-*/]*)*\\)*\\(+")){ // (x[+-*/])( || 2( => 2 | 222( => 222 | 5+( => 5| 2+3( |2+3+(
 			replaced = str.replaceAll("[+\\-*/]*\\(+", ""); //
@@ -24,7 +26,7 @@ public class PrepareString {
 				builder.append(')');
 			replaced = builder.toString().replaceAll("\\(", "*(");
 		}else if (str.matches("(\\d+[+\\-*/])+")){// when one operator is at the end of expressin like 2+ => 2, 5+3-4+ => 5+3-4
-			replaced = str.substring(0,str.length()-1);
+			replaced = str.substring(0, str.length()-1);
 		}
 		else if (str.matches("(.+\\(+)+\\S+")){ // 23+(4=>23+(4)
 			int count = 0;
@@ -80,5 +82,7 @@ public class PrepareString {
 		}
 		return sb.toString();
 	}
+
+
 
 }
