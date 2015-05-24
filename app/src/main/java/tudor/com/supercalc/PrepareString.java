@@ -7,9 +7,8 @@ public class PrepareString {
 	
 	public static String prepareStringForMathEval(String str) {
 		String replaced = null;
-//		str = str.replaceAll("π", String.format("(%0.10f)",Math.PI));
-//		str = str.replaceAll("e", String.format("(%0.10f)",Math.E));
 
+		str = str.replaceAll("(\\d+!)", "($1)");
 
 		if (str.matches("(\\d+[+\\-*/]*)*\\)*\\(+")){ // (x[+-*/])( || 2( => 2 | 222( => 222 | 5+( => 5| 2+3( |2+3+(
 			replaced = str.replaceAll("[+\\-*/]*\\(+", ""); //
@@ -51,6 +50,7 @@ public class PrepareString {
 		switch (ch) {
 			case '+':
 			case '-':
+			case '!':
 			case '*':
 			case '/':
 			case '%':

@@ -57,5 +57,7 @@
     <string name="rand">Rand</string>
     <string name="rad">Rad</string>
 
+    <string name="infinity">∞</string>
+
 
 </resources>

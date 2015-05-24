@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -90,14 +91,14 @@ public class MainActivityFragment extends Fragment {
 		mButtonDel = (Button) view.findViewById(R.id.buttonClear);
 
 		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
-		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);// todo
-		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot); // todo
+		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
+		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
 		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial); // todo x!y => (x!)y
 		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
-		mButtonPi = (Button) view.findViewById(R.id.buttonPi); // todo
-		mButtonE = (Button) view.findViewById(R.id.buttonE); // todo
+		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
+		mButtonE = (Button) view.findViewById(R.id.buttonE); 
 
 		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
 		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
@@ -153,10 +154,9 @@ public class MainActivityFragment extends Fragment {
 
 				if (!s.equals("") && s != null) {
 					Expression expression;
-
+					s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
+					s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
 					try { // try default evaluation
-						s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
-						s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
 								.function(log)
@@ -166,7 +166,6 @@ public class MainActivityFragment extends Fragment {
 								.setScale(5, BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
 								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
 						mTextViewResult.setText(d.toPlainString());
-
 					} catch (IllegalArgumentException e) { // if default fails
 						try { // parse the string and try again
 
@@ -180,7 +179,9 @@ public class MainActivityFragment extends Fragment {
 									.stripTrailingZeros();
 							mTextViewResult.setText(d.toPlainString());
 
-						} catch (IllegalArgumentException ex) {
+						}catch (NumberFormatException infinityException){
+							mTextViewResult.setText(getString(R.string.infinity));
+						}catch (IllegalArgumentException ex) {
 							mTextViewResult.setText("");
 						}
 					} catch (Exception e1) {
