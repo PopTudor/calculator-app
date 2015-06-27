@@ -91,7 +91,7 @@ public class MainActivityFragment extends Fragment {
 		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
 		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
 		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
-		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial); // todo x!y => (x!)y
+		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial); // todo x!y => (x!)y && daca 2! atunci cand apesi alt operator sa nu-l inlocuiasca pe !
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
 		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
@@ -298,7 +298,7 @@ public class MainActivityFragment extends Fragment {
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+	//todo
 			}
 		});
 
