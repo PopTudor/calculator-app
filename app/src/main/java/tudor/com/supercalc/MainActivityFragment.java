@@ -110,16 +110,11 @@ public class MainActivityFragment extends Fragment {
 	private void eventsOperators() {
 		mTextViewDetail.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
-				String s = (sequence.toString());
-				s = PrepareString.operatorMapping(s);
+				String s = sequence.toString();
 
-				//todo move these in a new class
 				Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 					@Override
 					public double apply(double... args) {
@@ -151,9 +146,7 @@ public class MainActivityFragment extends Fragment {
 
 				if (!s.equals("") && s != null) {
 					Expression expression;
-					s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
-					s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
-					s = s.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");
+					s = prepareStringForMathEval(s);
 					try { // try default evaluation
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)

@@ -4,58 +4,132 @@ package tudor.com.supercalc;
  * Created by Tudor on 21-May-15.
  */
 public class PrepareString {
-	
+
 	public static String prepareStringForMathEval(String str) {
-		String replaced = null;
-
-		if (str.matches("(\\d+!)"))
-			str = str.replaceAll("(\\d+!)", "($1)");
+		str = operatorMapping(str
 
 
-		if (str.matches("(\\d+[+\\-*/]*)*\\)*\\(+")){ // (x[+-*/])( || 2( => 2 | 222( => 222 | 5+( => 5| 2+3( |2+3+(
-			replaced = str.replaceAll("[+\\-*/]*\\(+", ""); //
-		}else if (str.matches("(\\d+\\(+)+\\S+")) { // (x()y  23(2 => 23*(2)|23(23(24 => 23*(23*(24))
-			int count = 0;
-			StringBuilder builder = new StringBuilder(str);
-			for (int i=0;i<str.length();++i)
-				if (builder.charAt(i)=='(')
-					++count;
-				else if (builder.charAt(i)==')')
-					--count;
-			for (int i=0;i<count;++i)
-				builder.append(')');
-			replaced = builder.toString().replaceAll("\\(", "*(");
-		}else if (str.matches("(\\d+[+\\-*/])+")){// when one operator is at the end of expressin like 2+ => 2, 5+3-4+ => 5+3-4
-			replaced = str.substring(0, str.length()-1);
-		}
-		else if (str.matches("(.+\\(+)+\\S+")){ // 23+(4=>23+(4)
-			int count = 0;
-			if (isOperator(str.charAt(str.length()-1)))
-				str = str.substring(0,str.length()-1);
 
-			StringBuilder builder = new StringBuilder(str);
-			for (int i=0;i<str.length();++i)
-				if (builder.charAt(i)=='(')
-					++count;
-				else if (builder.charAt(i)==')')
-					--count;
-			for (int i=0;i<count;++i)
-				builder.append(')');
-			replaced = builder.toString();
-		}else
-			return str;
+		);
+		str = fixInvalidEnd(str);
+		str = fixUnclosedParantheses(str);
+		str = fixOperatorAfterOpenParantheses(str);
+		str = fixOperatorBetweenParantheses(str);
+		str = fixMathSymbols(str);
 
-		return replaced;
+		return str;
 	}
+
+
+	private static String fixMathSymbols(String str){
+		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
+
+		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
+		str = str.replaceAll("e", String.format("(%f)", Math.E));
+		str = str.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");  // TODO: 05-Aug-15 add real numbers under the square roots, now are integers
+		return str;
+	}
+
+	/**
+	 * Remove any operator or open parantheses from the end of the expression
+	 * example: 33.11((-(/(*(
+	 * @param str
+	 * @return
+	 */
+	private static String fixInvalidEnd(String str) {
+		StringBuilder builder = new StringBuilder(str);
+		while (isOperator(builder.charAt(builder.length()-1)) ||
+				builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
+			builder.deleteCharAt(builder.length() - 1);
+		return builder.toString();
+	}
+
+	/**
+	 * Removing illogical possitioning of an operator right after opened parantheses in the middle of an expression
+	 * example: 55.44-(-((-22.11))), -55.44*(*22.11(*2(22.11))),-55.44*(*22.11(*(22.11))), -55.44*(*22.11((*2(22.11))))
+	 * @param str
+	 * @return
+	 */
+	private static String fixOperatorAfterOpenParantheses(String str) {
+		StringBuilder builder = new StringBuilder(str);
+		for (int i = 1; i < builder.length(); i++) {
+			char ch = builder.charAt(i);
+			if (isOperator(ch) && ch != '-' && isParantheses(builder.charAt(i - 1))) {
+				builder.deleteCharAt(i);
+			}
+		}
+		return builder.toString();
+	}
+
+
+	/* Under this is taking place parantheses fixing */
+
+	/**
+	 * Removes redundant paranthesis.
+	 * example: (), (+), (*), (/), 55.11((()())()(()))
+	 * @param str
+	 * @return
+	 */
+	private static String fixOperatorBetweenParantheses(String str){
+		str = str.replaceAll("\\(+[+*\\-/]?\\)+", "");
+		str = fixInvalidEnd(str);
+		return str;
+	}
+
+
+	/**
+	 * Fixing too many closed paranthesis or too few closed parantheses
+	 * @param str the expression
+	 * @return the expression with the right number of closing parantheses
+	 */
+	private static String fixUnclosedParantheses(String str) {
+		int countOpen = countOpenParantheses(str);
+		int countClosed = countClosedParantheses(str);
+		StringBuffer string=new StringBuffer(str);
+		if (countClosed >= countOpen)
+			string = new StringBuffer(str.substring(0, str.length()-(countClosed-countOpen)));
+		else {
+			for (int i = 0; i < Math.abs(countClosed - countOpen); i++) {
+				string.append(")");
+			}
+		}
+
+		return string.toString();
+	}
+	private static int countOpenParantheses(String str){
+		int count=0;
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i)=='(')
+				++count;
+		return count;
+	}
+	private static int countClosedParantheses(String str){
+		int count=0;
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i)==')')
+				++count;
+		return count;
+	}
+
+	/* end parantheses fixing*/
 
 	private static boolean isOperator(char ch) {
 		switch (ch) {
 			case '+':
 			case '-':
-			case '!':
 			case '*':
 			case '/':
 			case '%':
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	private static boolean isParantheses(char ch) {
+		switch (ch) {
+			case '(':
+			case ')':
 				return true;
 			default:
 				return false;
@@ -66,23 +140,4 @@ public class PrepareString {
 		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
 		return tmp;
 	}
-
-	public static String removeRedundantOperators(String s) {
-		StringBuilder sb = new StringBuilder(s);
-		String operators = "+-*/";
-		int index = 0;
-		while (index < sb.length() - 1) {
-			char c1 = sb.charAt(index);
-			char c2 = sb.charAt(index + 1);
-			if (c1 == c2 && operators.indexOf(c1) != -1) {
-				// remove the next character; the end is exclusive
-				sb.delete(index + 1, index + 2);
-			} else // added 'else' HERE
-				index++;
-		}
-		return sb.toString();
-	}
-
-
-
 }
