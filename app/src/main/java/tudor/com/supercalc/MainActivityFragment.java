@@ -264,55 +264,45 @@ public class MainActivityFragment extends Fragment {
 		mButtonLogarithm.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + "log(");
+				setTextView("log(");
 			}
 		});
-
 		mButtonLogarithmNat.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + "ln(");
+				setTextView("ln(");
 			}
 		});
-
 		mButtonPi.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + getString(R.string.pi));
+				setTextView(getString(R.string.pi));
 			}
 		});
 		mButtonE.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + getString(R.string.e));
+				setTextView(getString(R.string.e));
 			}
 		});
-
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 	//todo
 			}
 		});
-
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				setTextView("(");
 			}
 		});
-
 		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				setTextView(")");
 			}
 		});
-
 		mButtonDel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -34,9 +34,9 @@ public class PrepareString {
 	 */
 	private static String fixInvalidEnd(String str) {
 		StringBuilder builder = new StringBuilder(str);
-		while (str.length()>0
-				&& isOperator(builder.charAt(builder.length()-1))
-				|| builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
+		while (builder.length()>0
+				&& (isOperator(builder.charAt(builder.length()-1))
+				|| builder.charAt(builder.length()-1)=='('))// 3(, 3(( it useles to solve this like 3() or 3(())
 			builder.deleteCharAt(builder.length() - 1);
 		return builder.toString();
 	}
@@ -134,7 +134,7 @@ public class PrepareString {
 	}
 
 	public static String operatorMapping(String expression){
-		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
+		String tmp = expression.replaceAll("×","*").replaceAll("÷","/").replaceAll("√","(sqrt\\()");
 		return tmp;
 	}
 }
