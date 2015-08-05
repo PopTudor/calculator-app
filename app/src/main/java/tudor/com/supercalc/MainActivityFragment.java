@@ -105,7 +105,7 @@ public class MainActivityFragment extends Fragment {
 		mTextViewResult.requestFocus();
 
 
-		eventsNumbers();
+		setTextViewNumberKeyboard();
 		eventsOperators();
 
 		return view;
@@ -148,7 +148,7 @@ public class MainActivityFragment extends Fragment {
 					}
 				};
 
-				if (!s.equals("") && s != null) {
+				if (!s.equals("") && s != null && s.matches(".*\\D+.*")) {
 					Expression expression;
 					s = prepareStringForMathEval(s);
 					try { // try default evaluation
@@ -185,7 +185,6 @@ public class MainActivityFragment extends Fragment {
 				} else
 					mTextViewResult.setText("");
 			}
-
 			@Override
 			public void afterTextChanged(Editable s) {
 
@@ -195,72 +194,60 @@ public class MainActivityFragment extends Fragment {
 		mButtonDot.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.dot);
+				setTextView(R.string.dot);
 			}
 		});
-
 		mButtonPlus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.plus);
+				setTextView(R.string.plus);
 			}
 		});
 		mButtonMinus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.minus);
+				setTextView(R.string.minus);
 			}
 		});
 		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.multiply);
+				setTextView( R.string.multiply);
 			}
 		});
 		mButtonDivision.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.division);
+				setTextView( R.string.division);
 			}
 		});
-
 		mButtonModulo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.modulo);
+				setTextView( R.string.modulo);
 			}
 		});
 
 		mButtonPower.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.power);
+				setTextView(R.string.power);
 			}
 		});
 
 		mButtonRoot.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				mTextViewDetail.setText(str + getString(R.string.root));
+				setTextView(getString(R.string.root));
 			}
 		});
 
 		mButtonFactorial.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String str = mTextViewDetail.getText().toString();
-				checkForMultipleOperators(str, R.string.factorial);
+				setTextView(R.string.factorial);
 			}
 		});
-
 		mButtonLogarithm.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -273,6 +260,8 @@ public class MainActivityFragment extends Fragment {
 				setTextView("ln(");
 			}
 		});
+
+		/// PI --- E
 		mButtonPi.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -285,10 +274,11 @@ public class MainActivityFragment extends Fragment {
 				setTextView(getString(R.string.e));
 			}
 		});
+
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-	//todo
+
 			}
 		});
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
@@ -321,9 +311,15 @@ public class MainActivityFragment extends Fragment {
 			}
 		});
 	}
+
 	private void setTextView(String str){
 		mTextViewDetail.setText(mTextViewDetail.getText()+str);
 	}
+	private void setTextView(int operator){
+		String str = mTextViewDetail.getText().toString();
+		checkForMultipleOperators(str, operator);
+	}
+
 
 	/**
 	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
@@ -353,65 +349,65 @@ public class MainActivityFragment extends Fragment {
 			}
 	}
 
-	private void eventsNumbers() {
+	private void setTextViewNumberKeyboard() {
 		mButtonOne.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "1");
+				setTextView("1");
 			}
 		});
 		mButtonTwo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "2");
+				setTextView("2");
 			}
 		});
 		mButtonThree.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "3");
+				setTextView("3");
 			}
 		});
 		mButtonFour.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "4");
+				setTextView("4");
 			}
 		});
 		mButtonFive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "5");
+				setTextView("5");
 			}
 		});
 		mButtonSix.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "6");
+				setTextView("6");
 			}
 		});
 		mButtonSeven.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "7");
+				setTextView("7");
 			}
 		});
 		mButtonEight.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "8");
+				setTextView( "8");
 			}
 		});
 		mButtonNine.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "9");
+				setTextView("9");
 			}
 		});
 		mButtonZero.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "0");
+				setTextView("0");
 			}
 		});
 	}
