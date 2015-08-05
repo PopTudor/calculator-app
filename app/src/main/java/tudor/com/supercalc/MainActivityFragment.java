@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,9 @@ public class MainActivityFragment extends Fragment {
 
 		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
 		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
+		mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+		mTextViewDetail.setMovementMethod(new ScrollingMovementMethod());
+		mTextViewResult.requestFocus();
 
 
 		eventsNumbers();
@@ -110,16 +114,11 @@ public class MainActivityFragment extends Fragment {
 	private void eventsOperators() {
 		mTextViewDetail.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
-				String s = (sequence.toString());
-				s = PrepareString.operatorMapping(s);
+				String s = sequence.toString();
 
-				//todo move these in a new class
 				Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 					@Override
 					public double apply(double... args) {
@@ -151,9 +150,7 @@ public class MainActivityFragment extends Fragment {
 
 				if (!s.equals("") && s != null) {
 					Expression expression;
-					s = s.replaceAll(getString(R.string.pi), String.format("(%f)",Math.PI));
-					s = s.replaceAll(getString(R.string.e), String.format("(%f)",Math.E));
-					s = s.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");
+					s = prepareStringForMathEval(s);
 					try { // try default evaluation
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
@@ -305,14 +302,14 @@ public class MainActivityFragment extends Fragment {
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + "(");
+				setTextView("(");
 			}
 		});
 
 		mButtonBracketClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTextViewDetail.setText(mTextViewDetail.getText() + ")");
+				setTextView(")");
 			}
 		});
 
@@ -333,6 +330,9 @@ public class MainActivityFragment extends Fragment {
 				return false;
 			}
 		});
+	}
+	private void setTextView(String str){
+		mTextViewDetail.setText(mTextViewDetail.getText()+str);
 	}
 
 	/**
