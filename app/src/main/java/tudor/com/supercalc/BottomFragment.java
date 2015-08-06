@@ -1,7 +1,6 @@
 package tudor.com.supercalc;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -56,39 +55,156 @@ public class BottomFragment extends Fragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_bottom, container, false);
 
-//		mButtonOne = (Button) view.findViewById(R.id.buttonOne);
-//		mButtonTwo = (Button) view.findViewById(R.id.buttonTwo);
-//		mButtonThree = (Button) view.findViewById(R.id.buttonThree);
-//		mButtonFour = (Button) view.findViewById(R.id.buttonFour);
-//		mButtonFive = (Button) view.findViewById(R.id.buttonFive);
-//		mButtonSix = (Button) view.findViewById(R.id.buttonSix);
-//		mButtonSeven = (Button) view.findViewById(R.id.buttonSeven);
-//		mButtonEight = (Button) view.findViewById(R.id.buttonEight);
-//		mButtonNine = (Button) view.findViewById(R.id.buttonNine);
-//		mButtonZero = (Button) view.findViewById(R.id.buttonZero);
-//		mButtonDot = (Button) view.findViewById(R.id.buttonDot);
-//
-//		mButtonPlus = (Button) view.findViewById(R.id.buttonPlus);
-//		mButtonMinus = (Button) view.findViewById(R.id.buttonMinus);
-//		mButtonMultiply = (Button) view.findViewById(R.id.buttonMultiply);
-//		mButtonDivision = (Button) view.findViewById(R.id.buttonDivision);
-//		mButtonEqual = (Button) view.findViewById(R.id.buttonEqual);
-//		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
-//		mButtonDel = (Button) view.findViewById(R.id.buttonClear);
-//		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
+		mButtonOne = (Button) view.findViewById(R.id.buttonOne);
+		mButtonTwo = (Button) view.findViewById(R.id.buttonTwo);
+		mButtonThree = (Button) view.findViewById(R.id.buttonThree);
+		mButtonFour = (Button) view.findViewById(R.id.buttonFour);
+		mButtonFive = (Button) view.findViewById(R.id.buttonFive);
+		mButtonSix = (Button) view.findViewById(R.id.buttonSix);
+		mButtonSeven = (Button) view.findViewById(R.id.buttonSeven);
+		mButtonEight = (Button) view.findViewById(R.id.buttonEight);
+		mButtonNine = (Button) view.findViewById(R.id.buttonNine);
+		mButtonZero = (Button) view.findViewById(R.id.buttonZero);
+		mButtonDot = (Button) view.findViewById(R.id.buttonDot);
 
+		mButtonPlus = (Button) view.findViewById(R.id.buttonPlus);
+		mButtonMinus = (Button) view.findViewById(R.id.buttonMinus);
+		mButtonMultiply = (Button) view.findViewById(R.id.buttonMultiply);
+		mButtonDivision = (Button) view.findViewById(R.id.buttonDivision);
+		mButtonEqual = (Button) view.findViewById(R.id.buttonEqual);
+		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
+		mButtonDel = (Button) view.findViewById(R.id.buttonClear);
+		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
+		eventsOperators();
 		return view;
 	}
 	private void eventsOperators(){
+		mButtonDot.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.dot);
+			}
+		});
+		mButtonPlus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.plus);
+			}
+		});
+		mButtonMinus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.minus);
+			}
+		});
+		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.multiply);
+			}
+		});
+		mButtonDivision.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.division);
+			}
+		});
+		mButtonModulo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.modulo);
+			}
+		});
+		mButtonPower.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.power);
+			}
+		});
 
-	}
+		mButtonZero.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num0);
+			}
+		});
+		mButtonOne.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num1);
+			}
+		});
+		mButtonTwo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num2);
+			}
+		});
+		mButtonThree.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num3);
+			}
+		});
+		mButtonFour.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num4);
+			}
+		});
+		mButtonFive.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num5);
+			}
+		});
+		mButtonSix.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num6);
+			}
+		});
+		mButtonSeven.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num7);
+			}
+		});
+		mButtonEight.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num8);
+			}
+		});
+		mButtonNine.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.num9);
+			}
+		});
 
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onFragmentInteraction(uri);
-		}
+		mButtonEqual.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+// TODO: 06-Aug-15 make something here
+			}
+		});
+
+		mButtonDel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onNumberClicked(R.string.del);
+			}
+		});
+		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				mListener.onNumberClicked(R.string.delLong);
+				return true;
+			}
+		});
+
 	}
 
 	@Override
@@ -120,7 +236,7 @@ public class BottomFragment extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onFragmentInteraction(Uri uri);
+		public void onNumberClicked(int uri);
 	}
 
 }

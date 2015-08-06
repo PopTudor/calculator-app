@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -18,6 +19,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BottomFragment2 extends Fragment {
+	private Button mButtonLogarithm;
+	private Button mButtonLogarithmNat;
+
+	private Button mButtonPi;
+	private Button mButtonE;
+
 
 	private OnFragmentInteractionListener mListener;
 
@@ -34,6 +41,13 @@ public class BottomFragment2 extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_bottom_fragment2, container, false);
+
+//		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
+//		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
+//
+//		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
+//		mButtonE = (Button) view.findViewById(R.id.buttonE);
+
 
 		return view;
 	}
