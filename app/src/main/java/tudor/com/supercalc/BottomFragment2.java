@@ -1,7 +1,6 @@
 package tudor.com.supercalc;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +24,18 @@ public class BottomFragment2 extends Fragment {
 	private Button mButtonPi;
 	private Button mButtonE;
 
+	private Button mButtonFloor;
+	private Button mButtonCeiling;
+
+	private Button mButtonRand;
+
+	private Button mButtonSin;
+	private Button mButtonCos;
+	private Button mButtonTan;
+
+	private Button mButtonSinh;
+	private Button mButtonCosh;
+	private Button mButtonTanh;
 
 	private OnFragmentInteractionListener mListener;
 
@@ -42,21 +53,113 @@ public class BottomFragment2 extends Fragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_bottom_fragment2, container, false);
 
-//		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
-//		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
-//
-//		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
-//		mButtonE = (Button) view.findViewById(R.id.buttonE);
+		mButtonLogarithm = (Button) view.findViewById(R.id.buttonLogarithm);
+		mButtonLogarithmNat = (Button) view.findViewById(R.id.buttonLogarithmNat);
 
+		mButtonPi = (Button) view.findViewById(R.id.buttonPi);
+		mButtonE = (Button) view.findViewById(R.id.buttonE);
 
+		mButtonFloor = (Button) view.findViewById(R.id.buttonFloor);
+		mButtonCeiling = (Button) view.findViewById(R.id.buttonCeiling);
+
+		mButtonRand = (Button) view.findViewById(R.id.buttonRand);
+
+		mButtonSin = (Button) view.findViewById(R.id.buttonSin);
+		mButtonCos = (Button) view.findViewById(R.id.buttonCos);
+		mButtonTan = (Button) view.findViewById(R.id.buttonTan);
+
+		mButtonSinh = (Button) view.findViewById(R.id.buttonSinh);
+		mButtonCosh = (Button) view.findViewById(R.id.buttonCosh);
+		mButtonTanh = (Button) view.findViewById(R.id.buttonTanh);
+
+		eventsOperators();
 		return view;
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onFragmentInteraction(uri);
-		}
+	private void eventsOperators() {
+		mButtonLogarithm.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onSecondSymbolFragmentClicked(R.string.logarithm);
+			}
+		});
+		mButtonLogarithmNat.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onSecondSymbolFragmentClicked(R.string.logarithmNat);
+			}
+		});
+		/*	PI --- E	*/
+		mButtonPi.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onSecondSymbolFragmentClicked(R.string.pi);
+			}
+		});
+		mButtonE.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onSecondSymbolFragmentClicked(R.string.e);
+			}
+		});
+
+		mButtonCeiling.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.ceiling);
+			}
+		});
+		mButtonFloor.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.floor);
+			}
+		});
+		mButtonRand.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.rand);
+			}
+		});
+
+		mButtonSin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.sin);
+			}
+		});
+		mButtonCos.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.cos);
+			}
+		});
+		mButtonTan.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.tan);
+			}
+		});
+
+		mButtonSinh.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.sinh);
+			}
+		});
+		mButtonCosh.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.cosh);
+			}
+		});
+		mButtonTanh.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mListener.onSecondSymbolFragmentClicked(R.string.tanh);
+			}
+		});
+
 	}
 
 	@Override
@@ -88,7 +191,7 @@ public class BottomFragment2 extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onFragmentInteraction(Uri uri);
+		public void onSecondSymbolFragmentClicked(int symbol);
 	}
 
 }

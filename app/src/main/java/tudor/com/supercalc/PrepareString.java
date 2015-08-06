@@ -7,20 +7,21 @@ public class PrepareString {
 
 	public static String prepareStringForMathEval(String str) {
 		str = operatorMapping(str);
+		str = fixMathSymbols(str);
 		str = fixInvalidEnd(str);
 		str = fixUnclosedParantheses(str);
 		str = fixOperatorAfterOpenParantheses(str);
 		str = fixOperatorBetweenParantheses(str);
-		str = fixMathSymbols(str);
+
 
 		return str;
 	}
 
 
 	private static String fixMathSymbols(String str){
-		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
+		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)"); // ! factorial
 
-		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
+		str = str.replaceAll("π", String.format("(%f)", Math.PI));
 		str = str.replaceAll("e", String.format("(%f)", Math.E));
 		str = str.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");  // TODO: 05-Aug-15 add real numbers under the square roots, now are integers
 		return str;

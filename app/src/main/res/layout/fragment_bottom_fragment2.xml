@@ -1,13 +1,200 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="tudor.com.supercalc.BottomFragment2">
+<LinearLayout
+    android:id="@+id/blackBox"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="5"
+    android:background="#ff000000"
+    android:focusableInTouchMode="false"
+    android:orientation="vertical"
+    tools:context="tudor.com.supercalc.BottomFragment2"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/greenBox1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:animationCache="false"
+        android:orientation="horizontal"
+        >
 
-</FrameLayout>
+        <Button
+            android:id="@+id/buttonPi"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/pi"
+            />
+
+        <Button
+            android:id="@+id/buttonE"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/e"
+            />
+
+        <Button
+            android:id="@+id/buttonLogarithm"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/logarithm"
+            />
+
+        <Button
+            android:id="@+id/buttonLogarithmNat"
+            style="@style/rightSymbols"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff1c90c5"
+            android:gravity="center"
+            android:text="@string/logarithmNat"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/greenBox2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/buttonSin"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sin"/>
+
+        <Button
+            android:id="@+id/buttonCos"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cos"/>
+
+        <Button
+            android:id="@+id/buttonTan"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tan"
+            />
+
+        <Button
+            android:id="@+id/buttonFloor"
+            style="@style/rightSymbols"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff1c90c5"
+            android:gravity="center"
+            android:text="@string/floor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSinh"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sinh"/>
+
+        <Button
+            android:id="@+id/buttonCosh"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cosh"
+            />
+
+        <Button
+            android:id="@+id/buttonTanh"
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tanh"
+            />
+
+        <Button
+            android:id="@+id/buttonCeiling"
+            style="@style/rightSymbols"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff1c90c5"
+            android:gravity="center"
+            android:text="@string/ceiling"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+        <Button
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+        <Button
+            style="@style/middleNumbers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+        <Button
+            android:id="@+id/buttonRand"
+            style="@style/rightSymbols"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff1c90c5"
+            android:gravity="center"
+            android:text="@string/rand"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+

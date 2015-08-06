@@ -1,6 +1,5 @@
 package tudor.com.supercalc;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -51,8 +50,12 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		}
 	}
 
+	/**
+	 * Process BottomFragment buttons taps. Operands + operators + delete key
+	 * @param buttonPressed
+	 */
 	@Override
-	public void onNumberClicked(int buttonPressed) {
+	public void onFirstSymbolFragmentClicked(int buttonPressed) {
 		switch (buttonPressed){
 			case R.string.num0:
 				mTopFragment.setTextView(getString(R.string.num0));
@@ -111,11 +114,58 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 			case R.string.modulo:
 				mTopFragment.setTextView(R.string.modulo);
 				break;
+			default:
+				break;
 		}
 	}
 
+	/**
+	 * Process BottomsFragment2 buttons taps. Trigonometric functions and others
+	 * @param symbol
+	 */
 	@Override
-	public void onFragmentInteraction(Uri uri) {
+	public void onSecondSymbolFragmentClicked(int symbol) {
+		switch (symbol) {
+			case R.string.pi:
+				mTopFragment.setTextView(getString(R.string.pi));
+				break;
+			case R.string.e:
+				mTopFragment.setTextView(getString(R.string.e));
+				break;
+			case R.string.logarithm:
+				mTopFragment.setTextView(getString(R.string.logarithm) + "(");
+				break;
+			case R.string.logarithmNat:
+				mTopFragment.setTextView(getString(R.string.logarithmNat) + "(");
+				break;
+			case R.string.floor:
+				mTopFragment.setTextView(R.string.floor);
+				break;
+			case R.string.ceiling:
+				mTopFragment.setTextView(R.string.ceiling);
+				break;
+			case R.string.rand:
+				mTopFragment.setTextView(R.string.rand);
+				break;
+			case R.string.sin:
+				mTopFragment.setTextView(getString(R.string.sin)+"(");
+				break;
+			case R.string.cos:
+				mTopFragment.setTextView(getString(R.string.cos)+"(");
+				break;
+			case R.string.tan:
+				mTopFragment.setTextView(getString(R.string.tan)+"(");
+				break;
+			case R.string.sinh:
+				mTopFragment.setTextView(getString(R.string.sinh)+"(");
+				break;
+			case R.string.cosh:
+				mTopFragment.setTextView(getString(R.string.cosh)+"(");
+				break;
+			case R.string.tanh:
+				mTopFragment.setTextView(getString(R.string.tanh)+"(");
+				break;
+		}
 
 	}
 

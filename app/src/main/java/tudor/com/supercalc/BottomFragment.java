@@ -83,104 +83,104 @@ public class BottomFragment extends Fragment {
 		mButtonDot.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.dot);
+				mListener.onFirstSymbolFragmentClicked(R.string.dot);
 			}
 		});
 		mButtonPlus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.plus);
+				mListener.onFirstSymbolFragmentClicked(R.string.plus);
 			}
 		});
 		mButtonMinus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.minus);
+				mListener.onFirstSymbolFragmentClicked(R.string.minus);
 			}
 		});
 		mButtonMultiply.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.multiply);
+				mListener.onFirstSymbolFragmentClicked(R.string.multiply);
 			}
 		});
 		mButtonDivision.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.division);
+				mListener.onFirstSymbolFragmentClicked(R.string.division);
 			}
 		});
 		mButtonModulo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.modulo);
+				mListener.onFirstSymbolFragmentClicked(R.string.modulo);
 			}
 		});
 		mButtonPower.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.power);
+				mListener.onFirstSymbolFragmentClicked(R.string.power);
 			}
 		});
 
 		mButtonZero.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num0);
+				mListener.onFirstSymbolFragmentClicked(R.string.num0);
 			}
 		});
 		mButtonOne.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num1);
+				mListener.onFirstSymbolFragmentClicked(R.string.num1);
 			}
 		});
 		mButtonTwo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num2);
+				mListener.onFirstSymbolFragmentClicked(R.string.num2);
 			}
 		});
 		mButtonThree.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num3);
+				mListener.onFirstSymbolFragmentClicked(R.string.num3);
 			}
 		});
 		mButtonFour.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num4);
+				mListener.onFirstSymbolFragmentClicked(R.string.num4);
 			}
 		});
 		mButtonFive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num5);
+				mListener.onFirstSymbolFragmentClicked(R.string.num5);
 			}
 		});
 		mButtonSix.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num6);
+				mListener.onFirstSymbolFragmentClicked(R.string.num6);
 			}
 		});
 		mButtonSeven.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num7);
+				mListener.onFirstSymbolFragmentClicked(R.string.num7);
 			}
 		});
 		mButtonEight.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num8);
+				mListener.onFirstSymbolFragmentClicked(R.string.num8);
 			}
 		});
 		mButtonNine.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.num9);
+				mListener.onFirstSymbolFragmentClicked(R.string.num9);
 			}
 		});
 
@@ -194,13 +194,13 @@ public class BottomFragment extends Fragment {
 		mButtonDel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onNumberClicked(R.string.del);
+				mListener.onFirstSymbolFragmentClicked(R.string.del);
 			}
 		});
 		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				mListener.onNumberClicked(R.string.delLong);
+				mListener.onFirstSymbolFragmentClicked(R.string.delLong);
 				return true;
 			}
 		});
@@ -236,7 +236,7 @@ public class BottomFragment extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onNumberClicked(int uri);
+		public void onFirstSymbolFragmentClicked(int uri);
 	}
 
 }

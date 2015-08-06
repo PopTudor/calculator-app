@@ -18,6 +18,7 @@ import net.objecthunter.exp4j.operator.Operator;
 
 import java.math.BigDecimal;
 
+import static java.lang.Double.parseDouble;
 import static tudor.com.supercalc.PrepareString.prepareStringForMathEval;
 
 public class TopFragment extends Fragment {
@@ -100,8 +101,9 @@ public class TopFragment extends Fragment {
 								.function(ln)
 								.build();
 						BigDecimal d = new BigDecimal(expression.evaluate())
-								.setScale(5, BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
+								.setScale(15, BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
 								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
+
 						mTextViewResult.setText(d.toPlainString());
 					} catch (IllegalArgumentException e) { // if default fails
 						try { // parse the string and try again
@@ -112,13 +114,13 @@ public class TopFragment extends Fragment {
 									.function(ln)
 									.build();
 							BigDecimal d = new BigDecimal(expression.evaluate())
-									.setScale(5, BigDecimal.ROUND_HALF_UP)
+									.setScale(15, BigDecimal.ROUND_HALF_UP)
 									.stripTrailingZeros();
 							mTextViewResult.setText(d.toPlainString());
 
-						}catch (NumberFormatException infinityException){
+						} catch (NumberFormatException infinityException) {
 							mTextViewResult.setText(getString(R.string.infinity));
-						}catch (IllegalArgumentException ex) {
+						} catch (IllegalArgumentException ex) {
 							mTextViewResult.setText("");
 						}
 					} catch (Exception e1) {
@@ -156,45 +158,14 @@ public class TopFragment extends Fragment {
 				setTextView(")");
 			}
 		});
-
-		// TODO: 06-Aug-15 move these in bottom fragment 2
-//		mButtonLogarithm.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				setTextView("log(");
-//			}
-//		});
-//		mButtonLogarithmNat.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				setTextView("ln(");
-//			}
-//		});
-
-		/// PI --- E
-//		mButtonPi.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				setTextView(getString(R.string.pi));
-//			}
-//		});
-//		mButtonE.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				setTextView(getString(R.string.e));
-//			}
-//		});
-
-
-
-
 	}
 
 	public void setTextView(String str){
 		mTextViewDetail.setText(mTextViewDetail.getText()+str);
 	}
-	public void setTextView(int symbol){ // TODO: 06-Aug-15 handle bottom fragment 2 stuff
-		switch (symbol){
+	public void setTextView(int symbol) {
+		String result = mTextViewResult.getText().toString();
+		switch (symbol) {
 			case R.string.del:
 				String s = mTextViewDetail.getText().toString();
 				if (s.length() > 0)
@@ -204,6 +175,22 @@ public class TopFragment extends Fragment {
 				mTextViewDetail.setText("");
 				mTextViewResult.setText("");
 				break;
+			case R.string.ceiling:
+				if (result != null && !result.isEmpty())
+					mTextViewDetail.setText(String.valueOf((int) Math.ceil(parseDouble(result))));
+				mTextViewResult.setText("");
+				break;
+			case R.string.floor:
+				if (result!=null && !result.isEmpty())
+					mTextViewDetail.setText(String.valueOf((int) Math.floor(parseDouble(result))));
+				mTextViewResult.setText("");
+				break;
+			case R.string.rand:
+				mTextViewDetail.setText(String.valueOf(Math.random()));
+				break;
+			case R.string.dot:
+				if (mTextViewDetail.getText().toString().matches(".*\\.+.*"))
+					break;
 			default:
 				String str = mTextViewDetail.getText().toString();
 				checkForMultipleOperators(str, symbol);
