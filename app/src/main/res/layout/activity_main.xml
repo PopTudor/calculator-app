@@ -1,25 +1,26 @@
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    android:background="#00bfa2"
+    android:orientation="vertical">
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:id="@+id/topFragment"
         class="tudor.com.supercalc.TopFragment"
-        android:layout_weight="3"
-        tools:layout="@layout/fragment_top"
-        android:layout_gravity="top"/>
-    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_weight="3"
+        tools:layout="@layout/fragment_top"/>
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical"
+        android:layout_weight="5"
         >
     </android.support.v4.view.ViewPager>
 

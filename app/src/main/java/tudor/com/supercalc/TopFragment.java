@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,7 @@ public class TopFragment extends Fragment {
 	private Button mButtonBracketOpen;
 	private Button mButtonBracketClose;
 
-	private Button mButtonFactorial;
+	private Button mButtonDel;
 	private Button mButtonRoot;
 
 	private TextView mTextViewResult;
@@ -43,12 +43,16 @@ public class TopFragment extends Fragment {
 		mButtonBracketClose = (Button) view.findViewById(R.id.buttonBracketClose);
 
 		mButtonRoot = (Button) view.findViewById(R.id.buttonRoot);
-		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
+		mButtonDel = (Button) view.findViewById(R.id.buttonDel);
 
-		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
+
 		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
-		mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
-		mTextViewDetail.setMovementMethod(new ScrollingMovementMethod());
+		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
+		mTextViewDetail.setMovementMethod(new LinkMovementMethod());
+		mTextViewResult.setMovementMethod(new LinkMovementMethod());
+		mTextViewResult.requestFocus(); // without these IDK what happens in scrollable textview because it won't display it's contents
+		mTextViewDetail.requestFocus();
+
 
 		eventsOperators();
 		return view;
@@ -57,7 +61,9 @@ public class TopFragment extends Fragment {
 	private void eventsOperators() {
 		mTextViewDetail.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
 			@Override
 			public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 				String s = sequence.toString();
@@ -129,6 +135,7 @@ public class TopFragment extends Fragment {
 				} else
 					mTextViewResult.setText("");
 			}
+
 			@Override
 			public void afterTextChanged(Editable s) {
 
@@ -140,12 +147,24 @@ public class TopFragment extends Fragment {
 				setTextView(getString(R.string.root));
 			}
 		});
-		mButtonFactorial.setOnClickListener(new View.OnClickListener() {
+		mButtonDel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setTextView(R.string.factorial);
+				String s = mTextViewDetail.getText().toString();
+				if (s.length() > 0)
+					mTextViewDetail.setText(s.substring(0, s.length() - 1));
 			}
 		});
+		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				mTextViewDetail.setText("");
+				mTextViewResult.setText("");
+				return true;
+			}
+		});
+
+
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -166,15 +185,6 @@ public class TopFragment extends Fragment {
 	public void setTextView(int symbol) {
 		String result = mTextViewResult.getText().toString();
 		switch (symbol) {
-			case R.string.del:
-				String s = mTextViewDetail.getText().toString();
-				if (s.length() > 0)
-					mTextViewDetail.setText(s.substring(0, s.length() - 1));
-				break;
-			case R.string.delLong:
-				mTextViewDetail.setText("");
-				mTextViewResult.setText("");
-				break;
 			case R.string.ceiling:
 				if (result != null && !result.isEmpty())
 					mTextViewDetail.setText(String.valueOf((int) Math.ceil(parseDouble(result))));
@@ -188,9 +198,16 @@ public class TopFragment extends Fragment {
 			case R.string.rand:
 				mTextViewDetail.setText(String.valueOf(Math.random()));
 				break;
-			case R.string.dot:
-				if (mTextViewDetail.getText().toString().matches(".*\\.+.*"))
-					break;
+			case R.string.equal: // TODO: 07-Aug-15 add nice animations
+				mTextViewDetail.setText(mTextViewResult.getText());
+				mTextViewResult.setText("");
+				break;
+			case R.string.dot: // TODO: 07-Aug-15 hande cases 2.2.2.2.2 and 2.2.2 + 1.1.1.1 etc
+//				String tempStr = mTextViewDetail.getText().toString() + getString(R.string.dot);
+//				Log.d("TEST", tempStr);
+//				if (tempStr.matches("(\\d+\\.\\d+[\\-+/*])*"))
+//					;
+//				else break;
 			default:
 				String str = mTextViewDetail.getText().toString();
 				checkForMultipleOperators(str, symbol);
@@ -204,7 +221,9 @@ public class TopFragment extends Fragment {
 	 * @param operator
 	 */
 	private void checkForMultipleOperators(String str, int operator) {
-		if (str != null && !str.equals(""))
+		if (str.isEmpty() && getString(operator).charAt(0) == '-')
+			mTextViewDetail.setText(getString(operator));
+		if (str != null && !str.isEmpty())
 			switch (str.charAt(str.length() - 1)) {
 				case '.':
 				case '+':

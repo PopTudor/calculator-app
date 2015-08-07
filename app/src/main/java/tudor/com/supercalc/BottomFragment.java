@@ -36,18 +36,18 @@ public class BottomFragment extends Fragment {
 	private Button mButtonDivision;
 	private Button mButtonEqual;
 	private Button mButtonModulo;
-	private Button mButtonDel;
+	private Button mButtonFactorial;
 	private Button mButtonPower;
 
 	private OnFragmentInteractionListener mListener;
 
+	public BottomFragment() {
+		// Required empty public constructor
+	}
+
 	public static BottomFragment newInstance() {
 		BottomFragment fragment = new BottomFragment();
 		return fragment;
-	}
-
-	public BottomFragment() {
-		// Required empty public constructor
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BottomFragment extends Fragment {
 		mButtonDivision = (Button) view.findViewById(R.id.buttonDivision);
 		mButtonEqual = (Button) view.findViewById(R.id.buttonEqual);
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
-		mButtonDel = (Button) view.findViewById(R.id.buttonClear);
+		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
 
 		eventsOperators();
@@ -187,21 +187,14 @@ public class BottomFragment extends Fragment {
 		mButtonEqual.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-// TODO: 06-Aug-15 make something here
+				mListener.onFirstSymbolFragmentClicked(R.string.equal);
 			}
 		});
 
-		mButtonDel.setOnClickListener(new View.OnClickListener() {
+		mButtonFactorial.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onFirstSymbolFragmentClicked(R.string.del);
-			}
-		});
-		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				mListener.onFirstSymbolFragmentClicked(R.string.delLong);
-				return true;
+				mListener.onFirstSymbolFragmentClicked(R.string.factorial);
 			}
 		});
 
@@ -236,7 +229,7 @@ public class BottomFragment extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onFirstSymbolFragmentClicked(int uri);
+		void onFirstSymbolFragmentClicked(int uri);
 	}
 
 }

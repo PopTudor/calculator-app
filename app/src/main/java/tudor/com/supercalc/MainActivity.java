@@ -90,11 +90,8 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 			case R.string.dot:
 				mTopFragment.setTextView(R.string.dot);
 				break;
-			case R.string.del:
-				mTopFragment.setTextView(R.string.del);
-				break;
-			case R.string.delLong:
-				mTopFragment.setTextView(R.string.delLong);
+			case R.string.factorial:
+				mTopFragment.setTextView("!");
 				break;
 			case R.string.plus:
 				mTopFragment.setTextView(R.string.plus);
@@ -113,6 +110,9 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 				break;
 			case R.string.modulo:
 				mTopFragment.setTextView(R.string.modulo);
+				break;
+			case R.string.equal:
+				mTopFragment.setTextView(R.string.equal);
 				break;
 			default:
 				break;

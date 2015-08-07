@@ -9,7 +9,7 @@ android {
 	buildToolsVersion '22.0.1'
 	defaultConfig {
 		applicationId "tudor.com.supercalc"
-		minSdkVersion 14
+		minSdkVersion 16
 		targetSdkVersion 21
 		versionCode 1
 		versionName "1.0"
@@ -24,8 +24,7 @@ android {
 		androidTheme {
 		}
 		iOSTheme {
-
-			minSdkVersion 14
+			minSdkVersion 16
 			applicationId 'tudor.com.supercalc'
 			targetSdkVersion 21
 			versionCode 1

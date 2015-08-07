@@ -21,47 +21,52 @@
 
         <Button
             android:id="@+id/buttonPi"
-            
+
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/pi"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/pi"/>
 
         <Button
             android:id="@+id/buttonE"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/e"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/e"/>
 
         <Button
             android:id="@+id/buttonLogarithm"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/logarithm"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/logarithm"/>
 
         <Button
             android:id="@+id/buttonLogarithmNat"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/logarithmNat"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/logarithmNat"/>
     </LinearLayout>
 
     <LinearLayout
@@ -74,47 +79,52 @@
 
         <Button
             android:id="@+id/buttonSin"
-            
+
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sin"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/sin"/>
 
         <Button
             android:id="@+id/buttonCos"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/cos"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/cos"/>
 
         <Button
             android:id="@+id/buttonTan"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/tan"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/tan"/>
 
         <Button
             android:id="@+id/buttonFloor"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/floor"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/floor"/>
     </LinearLayout>
 
     <LinearLayout
@@ -125,91 +135,102 @@
 
         <Button
             android:id="@+id/buttonSinh"
-            
+
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sinh"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/sinh"/>
 
         <Button
             android:id="@+id/buttonCosh"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/cosh"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:text="@string/cosh"/>
 
         <Button
             android:id="@+id/buttonTanh"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/tanh"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/tanh"/>
 
         <Button
             android:id="@+id/buttonCeiling"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/ceiling"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/ceiling"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <Button
-            
+
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"/>
 
         <Button
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"/>
 
         <Button
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"/>
 
         <Button
             android:id="@+id/buttonRand"
-            
+
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/rand"
             android:clickable="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/rand"/>
     </LinearLayout>
 
 </LinearLayout>

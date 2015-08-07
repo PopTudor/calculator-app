@@ -20,48 +20,49 @@
         >
 
         <Button
-            android:id="@+id/buttonClear"
+            android:id="@+id/buttonFactorial"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/del"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/factorial"/>
 
         <Button
             android:id="@+id/buttonModulo"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/modulo"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/modulo"/>
 
         <Button
             android:id="@+id/buttonPower"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/power"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/power"/>
 
         <Button
             android:id="@+id/buttonDivision"
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/division"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/division"/>
     </LinearLayout>
 
     <LinearLayout
@@ -74,47 +75,48 @@
 
         <Button
             android:id="@+id/buttonSeven"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/seven"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/seven"/>
 
         <Button
             android:id="@+id/buttonEight"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/eight"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/eight"/>
 
         <Button
             android:id="@+id/buttonNine"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/nine"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/nine"/>
 
         <Button
             android:id="@+id/buttonMultiply"
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/multiply"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/multiply"/>
     </LinearLayout>
 
     <LinearLayout
@@ -125,46 +127,47 @@
 
         <Button
             android:id="@+id/buttonFour"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/four"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/four"/>
 
         <Button
             android:id="@+id/buttonFive"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/five"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:text="@string/five"/>
 
         <Button
             android:id="@+id/buttonSix"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/six"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/six"/>
 
         <Button
             android:id="@+id/buttonMinus"
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/minus"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/minus"/>
     </LinearLayout>
 
     <LinearLayout
@@ -175,47 +178,48 @@
 
         <Button
             android:id="@+id/buttonOne"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/one"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/one"/>
 
         <Button
             android:id="@+id/buttonTwo"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/two"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/two"/>
 
         <Button
             android:id="@+id/buttonThree"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/three"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/three"/>
 
         <Button
             android:id="@+id/buttonPlus"
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/plus"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/plus"/>
     </LinearLayout>
 
     <LinearLayout
@@ -227,36 +231,37 @@
 
         <Button
             android:id="@+id/buttonZero"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/zero"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/zero"/>
 
         <Button
             android:id="@+id/buttonDot"
+            style="@style/downLeftButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/dot"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/dot"/>
 
         <Button
             android:id="@+id/buttonEqual"
+            style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/equal"
+            android:background="@drawable/ripple_right"
             android:clickable="true"
             android:enabled="true"
-            style="@style/downTheme"/>
+            android:gravity="center"
+            android:text="@string/equal"/>
 
     </LinearLayout>
 </LinearLayout>
