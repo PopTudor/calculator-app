@@ -11,11 +11,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+<<<<<<< HEAD
         android:theme="@style/AppTheme.Base">
+=======
+        >
+>>>>>>> development
         <activity
             android:name=".MainActivity"
+<<<<<<< HEAD
             android:label="@string/app_name"
             android:screenOrientation="portrait">
+=======
+            android:theme="@style/AppTheme"
+            android:label="@string/app_name" >
+>>>>>>> development
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

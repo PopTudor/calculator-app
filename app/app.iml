@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="SuperCalc" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
 =======
 <module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="superCalc" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
@@ -8,6 +9,9 @@
 =======
 <module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="superCalc" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
 >>>>>>> origin/master
+=======
+<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="SuperCalc" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+>>>>>>> development
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -35,9 +39,12 @@
           <task>generateDebugAndroidTestSources</task>
           <task>generateDebugSources</task>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> development
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -50,11 +57,14 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <output url="file://$MODULE_DIR$/build/intermediates/classes/androidTheme/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/androidTheme/debug" />
 =======
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> development
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/debug" />
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
