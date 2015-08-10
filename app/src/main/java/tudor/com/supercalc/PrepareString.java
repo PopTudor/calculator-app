@@ -7,30 +7,41 @@ public class PrepareString {
 
 	public static String prepareStringForMathEval(String str) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		str = operatorMapping(str);
 		str = fixMathSymbols(str);
 =======
+=======
+>>>>>>> origin/master
 		str = operatorMapping(str
 
 
 
 		);
+<<<<<<< HEAD
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
+=======
+>>>>>>> origin/master
 		str = fixInvalidEnd(str);
 		str = fixUnclosedParantheses(str);
 		str = fixOperatorAfterOpenParantheses(str);
 		str = fixOperatorBetweenParantheses(str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 		str = fixMathSymbols(str);
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
+=======
+		str = fixMathSymbols(str);
+>>>>>>> origin/master
 
 		return str;
 	}
 
 
 	private static String fixMathSymbols(String str){
+<<<<<<< HEAD
 <<<<<<< HEAD
 		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)"); // ! factorial
 
@@ -40,6 +51,11 @@ public class PrepareString {
 
 		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
+=======
+		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
+
+		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
+>>>>>>> origin/master
 		str = str.replaceAll("e", String.format("(%f)", Math.E));
 		str = str.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");  // TODO: 05-Aug-15 add real numbers under the square roots, now are integers
 		return str;
@@ -54,6 +70,7 @@ public class PrepareString {
 	private static String fixInvalidEnd(String str) {
 		StringBuilder builder = new StringBuilder(str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (builder.length()>0
 				&& (isOperator(builder.charAt(builder.length()-1))
 				|| builder.charAt(builder.length()-1)=='('))// 3(, 3(( it useles to solve this like 3() or 3(())
@@ -61,6 +78,10 @@ public class PrepareString {
 		while (isOperator(builder.charAt(builder.length()-1)) ||
 				builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
+=======
+		while (isOperator(builder.charAt(builder.length()-1)) ||
+				builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
+>>>>>>> origin/master
 			builder.deleteCharAt(builder.length() - 1);
 		return builder.toString();
 	}
@@ -116,6 +137,23 @@ public class PrepareString {
 		}
 
 		return string.toString();
+<<<<<<< HEAD
+=======
+	}
+	private static int countOpenParantheses(String str){
+		int count=0;
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i)=='(')
+				++count;
+		return count;
+	}
+	private static int countClosedParantheses(String str){
+		int count=0;
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i)==')')
+				++count;
+		return count;
+>>>>>>> origin/master
 	}
 	private static int countOpenParantheses(String str){
 		int count=0;
@@ -131,6 +169,8 @@ public class PrepareString {
 				++count;
 		return count;
 	}
+
+	/* end parantheses fixing*/
 
 	/* end parantheses fixing*/
 
@@ -159,6 +199,7 @@ public class PrepareString {
 
 	public static String operatorMapping(String expression){
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String tmp = expression.replaceAll("×","*").replaceAll("÷","/").replaceAll("√","(sqrt\\()");
 		return tmp;
 	}
@@ -169,4 +210,9 @@ public class PrepareString {
 		return tmp;
 	}
 >>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
+=======
+		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
+		return tmp;
+	}
+>>>>>>> origin/master
 }
