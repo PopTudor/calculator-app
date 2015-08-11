@@ -1,4 +1,4 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -73,6 +73,11 @@ public class BottomFragment2 extends Fragment {
 		mButtonTanh = (Button) view.findViewById(R.id.buttonTanh);
 
 		eventsOperators();
+
+		// ads
+//		AdView mAdView = (AdView) view.findViewById(R.id.adView);
+//		AdRequest adRequest = new AdRequest.Builder().build();
+//		mAdView.loadAd(adRequest);
 		return view;
 	}
 

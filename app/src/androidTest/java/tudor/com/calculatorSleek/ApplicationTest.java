@@ -1,4 +1,4 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

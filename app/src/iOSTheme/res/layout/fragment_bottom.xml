@@ -7,7 +7,7 @@
     android:layout_weight="5"
     android:focusableInTouchMode="false"
     android:orientation="vertical"
-    tools:context="tudor.com.supercalc.BottomFragment"
+    tools:context="tudor.com.calculatorSleek.BottomFragment"
     >
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 /**
  * Created by Tudor on 21-May-15.
@@ -6,72 +6,23 @@ package tudor.com.supercalc;
 public class PrepareString {
 
 	public static String prepareStringForMathEval(String str) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 		str = operatorMapping(str);
 		str = fixMathSymbols(str);
-=======
-=======
->>>>>>> origin/master
-		str = operatorMapping(str
-
-
-
-		);
-<<<<<<< HEAD
->>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
-=======
->>>>>>> origin/master
-=======
-		str = operatorMapping(str);
->>>>>>> development
 		str = fixInvalidEnd(str);
 		str = fixUnclosedParantheses(str);
 		str = fixOperatorAfterOpenParantheses(str);
 		str = fixOperatorBetweenParantheses(str);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-		str = fixMathSymbols(str);
->>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
-=======
-		str = fixMathSymbols(str);
->>>>>>> origin/master
-=======
-		str = fixMathSymbols(str);
->>>>>>> development
 
 		return str;
 	}
 
 
 	private static String fixMathSymbols(String str){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)"); // ! factorial
 
 		str = str.replaceAll("π", String.format("(%f)", Math.PI));
-=======
-		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
-
-		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
->>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
-=======
-		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
-
-		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
->>>>>>> origin/master
-=======
-		str = str.replaceAll("(\\d+(\\.\\d+)?!)", "($1)");
-
-		str = str.replaceAll("Ï€", String.format("(%f)", Math.PI));
->>>>>>> development
 		str = str.replaceAll("e", String.format("(%f)", Math.E));
-		str = str.replaceAll("√(\\(*\\d+\\)*)", "sqrt($1)");  // TODO: 05-Aug-15 add real numbers under the square roots, now are integers
 		return str;
 	}
 
@@ -83,25 +34,9 @@ public class PrepareString {
 	 */
 	private static String fixInvalidEnd(String str) {
 		StringBuilder builder = new StringBuilder(str);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 		while (builder.length()>0
 				&& (isOperator(builder.charAt(builder.length()-1))
 				|| builder.charAt(builder.length()-1)=='('))// 3(, 3(( it useles to solve this like 3() or 3(())
-=======
-		while (isOperator(builder.charAt(builder.length()-1)) ||
-				builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
->>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
-=======
-		while (isOperator(builder.charAt(builder.length()-1)) ||
-				builder.charAt(builder.length()-1)=='(')// 3(, 3(( it useles to solve this like 3() or 3(())
->>>>>>> origin/master
-=======
-		while (builder.length()>0
-				&& (isOperator(builder.charAt(builder.length()-1))
-				|| builder.charAt(builder.length()-1)=='('))// 3(, 3(( it useles to solve this like 3() or 3(())
->>>>>>> development
 			builder.deleteCharAt(builder.length() - 1);
 		return builder.toString();
 	}
@@ -116,14 +51,12 @@ public class PrepareString {
 		StringBuilder builder = new StringBuilder(str);
 		for (int i = 1; i < builder.length(); i++) {
 			char ch = builder.charAt(i);
-			if (isOperator(ch) && ch != '-' && isParantheses(builder.charAt(i - 1))) {
+			if (isOperator(ch) && ch != '-' && builder.charAt(i - 1)=='(') {
 				builder.deleteCharAt(i);
 			}
 		}
 		return builder.toString();
 	}
-
-
 	/* Under this is taking place parantheses fixing */
 
 	/**
@@ -157,27 +90,6 @@ public class PrepareString {
 		}
 
 		return string.toString();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> development
-	}
-	private static int countOpenParantheses(String str){
-		int count=0;
-		for (int i = 0; i < str.length(); i++)
-			if (str.charAt(i)=='(')
-				++count;
-		return count;
-	}
-	private static int countClosedParantheses(String str){
-		int count=0;
-		for (int i = 0; i < str.length(); i++)
-			if (str.charAt(i)==')')
-				++count;
-		return count;
-<<<<<<< HEAD
->>>>>>> origin/master
 	}
 	private static int countOpenParantheses(String str){
 		int count=0;
@@ -193,11 +105,6 @@ public class PrepareString {
 				++count;
 		return count;
 	}
-
-	/* end parantheses fixing*/
-=======
-	}
->>>>>>> development
 
 	/* end parantheses fixing*/
 
@@ -225,24 +132,12 @@ public class PrepareString {
 	}
 
 	public static String operatorMapping(String expression){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> development
-		String tmp = expression.replaceAll("×","*").replaceAll("÷","/").replaceAll("√","(sqrt\\()");
+		String tmp = expression
+				.replaceAll("×", "*")
+				.replaceAll("÷", "/")
+				.replaceAll("√(\\(*\\d+(\\.\\d+)?\\)*)", "sqrt($1)");
 		return tmp;
 	}
 
 
-=======
-		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
-		return tmp;
-	}
->>>>>>> 1f7b20f9aa7a000264e7cb2a0f6e87a1886e6f6f
-=======
-		String tmp = expression.replaceAll("×","*").replaceAll("÷","/");
-		return tmp;
-	}
->>>>>>> origin/master
 }

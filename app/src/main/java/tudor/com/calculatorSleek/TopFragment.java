@@ -1,4 +1,4 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +19,7 @@ import net.objecthunter.exp4j.operator.Operator;
 import java.math.BigDecimal;
 
 import static java.lang.Double.parseDouble;
-import static tudor.com.supercalc.PrepareString.prepareStringForMathEval;
+import static tudor.com.calculatorSleek.PrepareString.prepareStringForMathEval;
 
 public class TopFragment extends Fragment {
 	private Button mButtonBracketOpen;
@@ -52,6 +52,7 @@ public class TopFragment extends Fragment {
 		mTextViewResult.setMovementMethod(new LinkMovementMethod());
 		mTextViewResult.requestFocus(); // without these IDK what happens in scrollable textview because it won't display it's contents
 		mTextViewDetail.requestFocus();
+
 
 
 		eventsOperators();
@@ -99,7 +100,6 @@ public class TopFragment extends Fragment {
 
 				if (!s.equals("") && s != null && s.matches(".*\\D+.*")) {
 					Expression expression;
-					s = prepareStringForMathEval(s);
 					try { // try default evaluation
 						expression = new ExpressionBuilder(s)
 								.operator(factorial)
@@ -111,7 +111,7 @@ public class TopFragment extends Fragment {
 								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
 
 						mTextViewResult.setText(d.toPlainString());
-					} catch (IllegalArgumentException e) { // if default fails
+					} catch (IllegalArgumentException | ArithmeticException e) { // if default fails
 						try { // parse the string and try again
 
 							expression = new ExpressionBuilder(prepareStringForMathEval(s))
@@ -120,7 +120,7 @@ public class TopFragment extends Fragment {
 									.function(ln)
 									.build();
 							BigDecimal d = new BigDecimal(expression.evaluate())
-									.setScale(15, BigDecimal.ROUND_HALF_UP)
+									.setScale(7, BigDecimal.ROUND_HALF_UP)
 									.stripTrailingZeros();
 							mTextViewResult.setText(d.toPlainString());
 
@@ -128,6 +128,10 @@ public class TopFragment extends Fragment {
 							mTextViewResult.setText(getString(R.string.infinity));
 						} catch (IllegalArgumentException ex) {
 							mTextViewResult.setText("");
+						} catch (ArithmeticException ex) {
+							mTextViewResult.setText("Error");
+						} catch (Exception ex) {
+							mTextViewDetail.setText("");
 						}
 					} catch (Exception e1) {
 						mTextViewResult.setText("Error");
@@ -139,6 +143,19 @@ public class TopFragment extends Fragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 
+			}
+		});
+		mTextViewDetail.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+//				LayoutParams lparams = new LayoutParams(
+//						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//				LeBubble tv=new TextView();
+//				tv.setLayoutParams(lparams);
+//				tv.setText("test");
+//				this.m_vwJokeLayout.addView(tv);
+
+				return false;
 			}
 		});
 		mButtonRoot.setOnClickListener(new View.OnClickListener() {
@@ -179,9 +196,10 @@ public class TopFragment extends Fragment {
 		});
 	}
 
-	public void setTextView(String str){
-		mTextViewDetail.setText(mTextViewDetail.getText()+str);
+	public void setTextView(String str) {
+		mTextViewDetail.setText(mTextViewDetail.getText() + str);
 	}
+
 	public void setTextView(int symbol) {
 		String result = mTextViewResult.getText().toString();
 		switch (symbol) {
@@ -191,7 +209,7 @@ public class TopFragment extends Fragment {
 				mTextViewResult.setText("");
 				break;
 			case R.string.floor:
-				if (result!=null && !result.isEmpty())
+				if (result != null && !result.isEmpty())
 					mTextViewDetail.setText(String.valueOf((int) Math.floor(parseDouble(result))));
 				mTextViewResult.setText("");
 				break;
@@ -199,7 +217,8 @@ public class TopFragment extends Fragment {
 				mTextViewDetail.setText(String.valueOf(Math.random()));
 				break;
 			case R.string.equal: // TODO: 07-Aug-15 add nice animations
-				mTextViewDetail.setText(mTextViewResult.getText());
+				if (!mTextViewResult.getText().toString().equalsIgnoreCase("error"))
+					mTextViewDetail.setText(mTextViewResult.getText());
 				mTextViewResult.setText("");
 				break;
 			case R.string.dot: // TODO: 07-Aug-15 hande cases 2.2.2.2.2 and 2.2.2 + 1.1.1.1 etc
@@ -213,6 +232,7 @@ public class TopFragment extends Fragment {
 				checkForMultipleOperators(str, symbol);
 		}
 	}
+
 	/**
 	 * Verifica daca pe pozitia anterioara din string avem un operator si daca avem atunci il inlocuieste
 	 * cu operatorul butonului apasat

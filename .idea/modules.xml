@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SuperCalc.iml" filepath="$PROJECT_DIR$/SuperCalc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CalculatorSleek.iml" filepath="$PROJECT_DIR$/CalculatorSleek.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

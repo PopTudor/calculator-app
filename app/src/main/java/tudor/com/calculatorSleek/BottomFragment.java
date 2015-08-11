@@ -1,6 +1,7 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -75,8 +76,17 @@ public class BottomFragment extends Fragment {
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
 		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
-
+		int sizeMask = (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+//		if ( sizeMask == Configuration.SCREENLAYOUT_SIZE_LARGE || sizeMask==Configuration.SCREENLAYOUT_SIZE_SMALL
+//				|| sizeMask==Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+//			mButtonOne.setTextSize(50);
+//		}
 		eventsOperators();
+
+		// ads
+//		AdView mAdView = (AdView) view.findViewById(R.id.adView);
+//		AdRequest adRequest = new AdRequest.Builder().addTestDevice(R.string.adTestDevice+"").build();
+//		mAdView.loadAd(adRequest);
 		return view;
 	}
 	private void eventsOperators(){
@@ -231,5 +241,7 @@ public class BottomFragment extends Fragment {
 		// TODO: Update argument type and name
 		void onFirstSymbolFragmentClicked(int uri);
 	}
+
+
 
 }

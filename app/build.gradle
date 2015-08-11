@@ -8,34 +8,47 @@ android {
 	compileSdkVersion 22
 	buildToolsVersion '22.0.1'
 	defaultConfig {
-		applicationId "tudor.com.supercalc"
+		applicationId "tudor.com.calculatorSleek"
 		minSdkVersion 16
 		targetSdkVersion 21
-		versionCode 1
-		versionName "1.0"
+		versionCode 2
+		versionName "1.1"
 	}
 	buildTypes {
 		release {
-			minifyEnabled false
+			minifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
 	productFlavors {
+		paidVersion{
+			applicationId "tudor.com.calculatorSleek.paid"
+			minSdkVersion 16
+			targetSdkVersion 21
+			versionCode 2
+			versionName "1.1"
+		}
 		androidTheme {
+			applicationId "tudor.com.calculatorSleek.android"
+			minSdkVersion 16
+			targetSdkVersion 21
+			versionCode 2
+			versionName "1.1"
 		}
 		iOSTheme {
 			minSdkVersion 16
-			applicationId 'tudor.com.supercalc'
-			targetSdkVersion 21
-			versionCode 1
-			versionName '1.0'
+			applicationId 'tudor.com.calculatorSleek.ios'
+			targetSdkVersion 22
+			versionCode 2
+			versionName '1.1'
 		}
 	}
 }
 
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
-	compile 'com.android.support:appcompat-v7:21.0.3'
 	compile files('libs/exp4j-0.4.5.jar')
+	compile 'com.android.support:appcompat-v7:22.2.1'
 	compile 'com.melnykov:floatingactionbutton:1.3.0'
+	compile 'com.google.android.gms:play-services-ads:7.5.0'
 }

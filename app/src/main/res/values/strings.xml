@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuperCalc</string>
+    <string name="app_name">Calculator Sleek</string>
     <string name="action_settings">Settings</string>
 
     <string name="del">DEL</string>
@@ -66,4 +66,12 @@
     <string name="num8">8</string>
     <string name="num9">9</string>
 
+    // ads
+    <string name="banner_ad_bottom">ca-app-pub-9957088357301767/7291355538</string>
+    <string name="banner_ad_bottom2">ca-app-pub-9957088357301767/1244821938</string>
+    <string name="home_banner">ca-app-pub-9957088357301767/8628487933</string>
+
+
+
+    <string name="adTestDevice">950FD9FEDAE19BA7BF5DC84E5183D978</string>
 </resources>

@@ -9,4 +9,5 @@
 
     <color name="white">@android:color/white</color>
 
+    <color name="backgroundColor">#00BFA5</color>
 </resources>

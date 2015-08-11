@@ -1,15 +1,27 @@
-package tudor.com.supercalc;
+package tudor.com.calculatorSleek;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.Button;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
+import java.util.ArrayList;
 
 
-public class MainActivity extends FragmentActivity implements BottomFragment.OnFragmentInteractionListener,BottomFragment2.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements BottomFragment.OnFragmentInteractionListener, BottomFragment2.OnFragmentInteractionListener {
+	private InterstitialAd mInterstitialAd;
+	private int countingEquals=1;
+	private CountDownTimer mTimer;
+
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
@@ -27,6 +39,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 	private PagerAdapter mPagerAdapter;
 
 	private TopFragment mTopFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,8 +49,53 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
 
-		mTopFragment = (TopFragment)getSupportFragmentManager().findFragmentById(R.id.topFragment);
+		mTopFragment = (TopFragment) getSupportFragmentManager().findFragmentById(R.id.topFragment);
+
+		//ads
+		mInterstitialAd = new InterstitialAd(this);
+//		mInterstitialAd.setAdUnitId(getString(R.string.home_banner));
+		mInterstitialAd.setAdListener(new AdListener() {
+			@Override
+			public void onAdClosed() {
+				requestNewInterstitial();
+			}
+		});
+		requestNewInterstitial();
+
+
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mTimer = new CountDownTimer(180000, 1000) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+
+			}
+
+			@Override
+			public void onFinish() {
+				if (mInterstitialAd.isLoaded())
+					mInterstitialAd.show();
+			}
+		};
+		mTimer.start();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		mTimer.cancel();
+	}
+
+
+	private void requestNewInterstitial() {
+		AdRequest adRequest = new AdRequest.Builder().build();
+
+//		mInterstitialAd.loadAd(adRequest);
+	}
+
 	@Override
 	public void onBackPressed() {
 		if (mPager.getCurrentItem() == 0) {
@@ -52,11 +110,12 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 	/**
 	 * Process BottomFragment buttons taps. Operands + operators + delete key
+	 *
 	 * @param buttonPressed
 	 */
 	@Override
 	public void onFirstSymbolFragmentClicked(int buttonPressed) {
-		switch (buttonPressed){
+		switch (buttonPressed) {
 			case R.string.num0:
 				mTopFragment.setTextView(getString(R.string.num0));
 				break;
@@ -112,7 +171,11 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 				mTopFragment.setTextView(R.string.modulo);
 				break;
 			case R.string.equal:
-				mTopFragment.setTextView(R.string.equal);
+				if (mInterstitialAd.isLoaded() && countingEquals%30==0)
+					mInterstitialAd.show();
+				else
+					mTopFragment.setTextView(R.string.equal);
+					++countingEquals;
 				break;
 			default:
 				break;
@@ -121,6 +184,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 	/**
 	 * Process BottomsFragment2 buttons taps. Trigonometric functions and others
+	 *
 	 * @param symbol
 	 */
 	@Override
@@ -148,22 +212,22 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 				mTopFragment.setTextView(R.string.rand);
 				break;
 			case R.string.sin:
-				mTopFragment.setTextView(getString(R.string.sin)+"(");
+				mTopFragment.setTextView(getString(R.string.sin) + "(");
 				break;
 			case R.string.cos:
-				mTopFragment.setTextView(getString(R.string.cos)+"(");
+				mTopFragment.setTextView(getString(R.string.cos) + "(");
 				break;
 			case R.string.tan:
-				mTopFragment.setTextView(getString(R.string.tan)+"(");
+				mTopFragment.setTextView(getString(R.string.tan) + "(");
 				break;
 			case R.string.sinh:
-				mTopFragment.setTextView(getString(R.string.sinh)+"(");
+				mTopFragment.setTextView(getString(R.string.sinh) + "(");
 				break;
 			case R.string.cosh:
-				mTopFragment.setTextView(getString(R.string.cosh)+"(");
+				mTopFragment.setTextView(getString(R.string.cosh) + "(");
 				break;
 			case R.string.tanh:
-				mTopFragment.setTextView(getString(R.string.tanh)+"(");
+				mTopFragment.setTextView(getString(R.string.tanh) + "(");
 				break;
 		}
 
@@ -180,7 +244,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 		@Override
 		public Fragment getItem(int position) {
-			switch (position){
+			switch (position) {
 				case 0:
 					return BottomFragment.newInstance();
 				case 1:
@@ -191,8 +255,19 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		}
 
 		@Override
+		public float getPageWidth(int position) {
+			super.getPageWidth(position);
+			return (position == 0 ? 0.97f : 0.95f);
+		}
+
+		@Override
 		public int getCount() {
 			return NUM_PAGES;
 		}
+	}
+
+	public static void setButtonsFont(ArrayList<Button> buttons, int size) {
+		for (Button button : buttons)
+			button.setTextSize(size);
 	}
 }

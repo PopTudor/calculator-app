@@ -7,8 +7,8 @@
     android:layout_weight="5"
     android:focusableInTouchMode="false"
     android:orientation="vertical"
-    tools:context="tudor.com.supercalc.BottomFragment"
-    >
+    tools:context="tudor.com.calculatorSleek.BottomFragment"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/greenBox1"
@@ -62,7 +62,8 @@
             android:clickable="true"
             android:enabled="true"
             android:gravity="center"
-            android:text="@string/division"/>
+            android:text="@string/division"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +117,8 @@
             android:clickable="true"
             android:enabled="true"
             android:gravity="center"
-            android:text="@string/multiply"/>
+            android:text="@string/multiply"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -167,7 +169,8 @@
             android:clickable="true"
             android:enabled="true"
             android:gravity="center"
-            android:text="@string/minus"/>
+            android:text="@string/minus"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -219,7 +222,8 @@
             android:clickable="true"
             android:enabled="true"
             android:gravity="center"
-            android:text="@string/plus"/>
+            android:text="@string/plus"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -261,8 +265,22 @@
             android:clickable="true"
             android:enabled="true"
             android:gravity="center"
-            android:text="@string/equal"/>
+            android:text="@string/equal"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_bottom"
+        android:layout_weight="0.5"
+        android:background="#838383"
+        android:layout_marginRight="10dp"
+        >
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>
 
