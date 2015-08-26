@@ -63,7 +63,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/division"
-            android:layout_marginRight="10dp"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -118,7 +118,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/multiply"
-            android:layout_marginRight="10dp"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -170,7 +170,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/minus"
-            android:layout_marginRight="10dp"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -223,7 +223,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/plus"
-            android:layout_marginRight="10dp"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -266,7 +266,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/equal"
-            android:layout_marginRight="10dp"/>
+            />
 
     </LinearLayout>
     <com.google.android.gms.ads.AdView
@@ -278,8 +278,7 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_bottom"
         android:layout_weight="0.5"
-        android:background="#838383"
-        android:layout_marginRight="10dp"
+        android:background="#000000"
         >
     </com.google.android.gms.ads.AdView>
 </LinearLayout>

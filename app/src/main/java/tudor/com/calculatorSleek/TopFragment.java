@@ -53,8 +53,6 @@ public class TopFragment extends Fragment {
 		mTextViewResult.requestFocus(); // without these IDK what happens in scrollable textview because it won't display it's contents
 		mTextViewDetail.requestFocus();
 
-
-
 		eventsOperators();
 		return view;
 	}

@@ -53,7 +53,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 		//ads
 		mInterstitialAd = new InterstitialAd(this);
-//		mInterstitialAd.setAdUnitId(getString(R.string.home_banner));
+		mInterstitialAd.setAdUnitId(getString(R.string.home_banner));
 		mInterstitialAd.setAdListener(new AdListener() {
 			@Override
 			public void onAdClosed() {
@@ -63,6 +63,10 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		requestNewInterstitial();
 
 
+	}
+	private void requestNewInterstitial() {
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mInterstitialAd.loadAd(adRequest);
 	}
 
 	@Override
@@ -88,14 +92,6 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		super.onPause();
 		mTimer.cancel();
 	}
-
-
-	private void requestNewInterstitial() {
-		AdRequest adRequest = new AdRequest.Builder().build();
-
-//		mInterstitialAd.loadAd(adRequest);
-	}
-
 	@Override
 	public void onBackPressed() {
 		if (mPager.getCurrentItem() == 0) {
@@ -170,7 +166,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 			case R.string.modulo:
 				mTopFragment.setTextView(R.string.modulo);
 				break;
-			case R.string.equal:
+			case R.string.equal: // ads
 				if (mInterstitialAd.isLoaded() && countingEquals%30==0)
 					mInterstitialAd.show();
 				else
@@ -252,12 +248,6 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 				default:
 					return null;
 			}
-		}
-
-		@Override
-		public float getPageWidth(int position) {
-			super.getPageWidth(position);
-			return (position == 0 ? 0.97f : 0.95f);
 		}
 
 		@Override

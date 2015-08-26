@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +90,9 @@ public class BottomFragment extends Fragment {
 //		AdView mAdView = (AdView) view.findViewById(R.id.adView);
 //		AdRequest adRequest = new AdRequest.Builder().addTestDevice(R.string.adTestDevice+"").build();
 //		mAdView.loadAd(adRequest);
+		AdView    mAdView = (AdView) view.findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
 		return view;
 	}
 	private void eventsOperators(){

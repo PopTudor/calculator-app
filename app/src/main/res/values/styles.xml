@@ -40,7 +40,6 @@
 
     <style name="downRightButtons" parent="downTheme">
         <item name="android:background">@drawable/ripple_right</item>
-
     </style>
 
     <style name="topButtons" parent="topTheme">

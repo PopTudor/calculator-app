@@ -14,7 +14,7 @@
         android:id="@+id/greenBox1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.25"
         android:animationCache="false"
         android:orientation="horizontal"
         >
@@ -25,7 +25,6 @@
             style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_right"
             android:clickable="true"
@@ -75,7 +74,7 @@
         android:id="@+id/greenBox2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.25"
         android:orientation="horizontal"
         >
 
@@ -85,7 +84,6 @@
             style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_right"
             android:clickable="true"
@@ -134,7 +132,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.25"
         android:orientation="horizontal">
 
         <Button
@@ -143,7 +141,6 @@
             style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_right"
             android:clickable="true"
@@ -190,7 +187,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.25"
         android:orientation="horizontal"
         >
 
@@ -199,7 +196,6 @@
             style="@style/downRightButtons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/ripple_right"
             android:clickable="true"
@@ -250,8 +246,8 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_bottom2"
         android:layout_weight="0.5"
-        android:background="#838383"
-        android:layout_marginLeft="5dp">
+        android:background="#000000"
+        >
     </com.google.android.gms.ads.AdView>
 </LinearLayout>
 
