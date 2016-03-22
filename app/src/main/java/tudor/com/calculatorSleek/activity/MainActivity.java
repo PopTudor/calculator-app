@@ -1,7 +1,6 @@
-package tudor.com.calculatorSleek;
+package tudor.com.calculatorSleek.activity;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -10,18 +9,20 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.Button;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 
 import java.util.ArrayList;
 
+import io.fabric.sdk.android.Fabric;
+import tudor.com.calculatorSleek.android.R;
+import tudor.com.calculatorSleek.fragments.BottomFragment;
+import tudor.com.calculatorSleek.fragments.BottomFragment2;
+import tudor.com.calculatorSleek.fragments.TopFragment;
 
-public class MainActivity extends FragmentActivity implements BottomFragment.OnFragmentInteractionListener, BottomFragment2.OnFragmentInteractionListener {
-	private InterstitialAd mInterstitialAd;
-	private int countingEquals=1;
-	private CountDownTimer mTimer;
 
+public class MainActivity extends FragmentActivity
+		implements BottomFragment.OnFragmentInteractionListener, BottomFragment2.OnFragmentInteractionListener {
 	/**
 	 * The number of pages (wizard steps) to show in this demo.
 	 */
@@ -40,10 +41,16 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 	private TopFragment mTopFragment;
 
+	public static void setButtonsFont(ArrayList<Button> buttons, int size) {
+		for (Button button : buttons)
+			button.setTextSize(size);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Fabric.with(this, new Crashlytics(), new Answers());
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -51,47 +58,9 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 
 		mTopFragment = (TopFragment) getSupportFragmentManager().findFragmentById(R.id.topFragment);
 
-		//ads
-		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId(getString(R.string.home_banner));
-		mInterstitialAd.setAdListener(new AdListener() {
-			@Override
-			public void onAdClosed() {
-				requestNewInterstitial();
-			}
-		});
-		requestNewInterstitial();
-
 
 	}
-	private void requestNewInterstitial() {
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mInterstitialAd.loadAd(adRequest);
-	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mTimer = new CountDownTimer(180000, 1000) {
-			@Override
-			public void onTick(long millisUntilFinished) {
-
-			}
-
-			@Override
-			public void onFinish() {
-				if (mInterstitialAd.isLoaded())
-					mInterstitialAd.show();
-			}
-		};
-		mTimer.start();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mTimer.cancel();
-	}
 	@Override
 	public void onBackPressed() {
 		if (mPager.getCurrentItem() == 0) {
@@ -167,11 +136,7 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 				mTopFragment.setTextView(R.string.modulo);
 				break;
 			case R.string.equal: // ads
-				if (mInterstitialAd.isLoaded() && countingEquals%30==0)
-					mInterstitialAd.show();
-				else
-					mTopFragment.setTextView(R.string.equal);
-					++countingEquals;
+				mTopFragment.setTextView(R.string.equal);
 				break;
 			default:
 				break;
@@ -254,10 +219,5 @@ public class MainActivity extends FragmentActivity implements BottomFragment.OnF
 		public int getCount() {
 			return NUM_PAGES;
 		}
-	}
-
-	public static void setButtonsFont(ArrayList<Button> buttons, int size) {
-		for (Button button : buttons)
-			button.setTextSize(size);
 	}
 }

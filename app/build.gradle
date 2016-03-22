@@ -1,46 +1,25 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'io.fabric'
 android {
-	signingConfigs {
-		config {
-		}
-	}
-	compileSdkVersion 22
-	buildToolsVersion '22.0.1'
+	compileSdkVersion 23
+	buildToolsVersion '23.0.2'
 	defaultConfig {
-		applicationId "tudor.com.calculatorSleek"
-		minSdkVersion 16
-		targetSdkVersion 21
-		versionCode 2
-		versionName "1.1"
+		applicationId "tudor.com.calculatorSleek.android"
+		minSdkVersion 9
+		targetSdkVersion 23
+		versionCode 8
+		versionName "1.0.7"
 	}
 	buildTypes {
 		release {
 			minifyEnabled true
+			debuggable false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
-	}
-	productFlavors {
-		paidVersion{
-			applicationId "tudor.com.calculatorSleek.paid"
-			minSdkVersion 16
-			targetSdkVersion 21
-			versionCode 2
-			versionName "1.1"
-		}
-		androidTheme {
-			applicationId "tudor.com.calculatorSleek.android"
-			minSdkVersion 16
-			targetSdkVersion 21
-			versionCode 2
-			versionName "1.1"
-		}
-		iOSTheme {
-			minSdkVersion 16
-			applicationId 'tudor.com.calculatorSleek.ios'
-			targetSdkVersion 22
-			versionCode 2
-			versionName '1.1'
+		debug{
+			debuggable true
+			minifyEnabled false
 		}
 	}
 }
@@ -48,7 +27,8 @@ android {
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
 	compile files('libs/exp4j-0.4.5.jar')
-	compile 'com.android.support:appcompat-v7:22.2.1'
-	compile 'com.melnykov:floatingactionbutton:1.3.0'
-	compile 'com.google.android.gms:play-services-ads:7.5.0'
+	compile 'com.android.support:appcompat-v7:23.1.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 }

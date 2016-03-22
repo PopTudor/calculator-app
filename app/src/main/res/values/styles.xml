@@ -35,7 +35,7 @@
 
     <style name="downLeftButtons" parent="downTheme">
         <item name="android:background">@drawable/ripple_left</item>
-        <item name="android:textColor">#707070</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="downRightButtons" parent="downTheme">

@@ -3,11 +3,13 @@
     <color name="primaryColor">#03A9F4</color>
     <color name="primaryColorDark">#0288D1</color>
     <color name="accentColor">#FF9800</color>
+
     <color name="textColorUp">#E1F5FE</color>
     <color name="textviewBackground">#edf1fe</color>
     <color name="textColorDown">#01579B</color>
 
     <color name="white">@android:color/white</color>
+    <color name="black">#D9000000</color>
 
     <color name="backgroundColor">#00BFA5</color>
 </resources>

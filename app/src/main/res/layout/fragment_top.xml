@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context=".MainActivityFragment"
     >
-    <TextView
+    <EditText
         android:id="@+id/textViewDetail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:background="@color/textviewBackground"
         android:ellipsize="none"
         android:enabled="true"
+        android:lines="1"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center_vertical|right"
@@ -28,18 +28,20 @@
 
         android:singleLine="true"
         android:textAllCaps="false"
-        android:textColor="#282828"
+        android:textColor="#D9000000"
         android:textIsSelectable="false"
         android:textSize="50sp"
         android:textStyle="normal"
-        android:visibility="visible"/>
-      />
+        android:visibility="visible"
+        android:background="#D9ffffff"
+        android:inputType="number|numberSigned|numberDecimal"/>
+
     <TextView
         android:id="@+id/textViewResult"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:background="@color/textviewBackground"
+        android:layout_weight="0.6"
+        android:background="#fff"
         android:ellipsize="none"
         android:enabled="true"
         android:focusable="true"
@@ -53,13 +55,12 @@
         android:selectAllOnFocus="true"
 
             android:singleLine="true"
-        android:text="0"
         android:textAllCaps="false"
-        android:textColor="#f2a4a4a4"
         android:textIsSelectable="false"
         android:textSize="30sp"
         android:textStyle="normal"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:textColor="#D9000000"/>
 
     <LinearLayout
         android:id="@+id/orangeBox2"

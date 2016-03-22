@@ -1,6 +1,6 @@
-package tudor.com.calculatorSleek;
+package tudor.com.calculatorSleek.fragments;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import tudor.com.calculatorSleek.android.R;
 
 
 /**
@@ -77,10 +76,6 @@ public class BottomFragment2 extends Fragment {
 
 		eventsOperators();
 
-		// ads
-		AdView mAdView = (AdView) view.findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
 		return view;
 	}
 
@@ -171,7 +166,7 @@ public class BottomFragment2 extends Fragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(Context activity) {
 		super.onAttach(activity);
 		try {
 			mListener = (OnFragmentInteractionListener) activity;

@@ -1,7 +1,6 @@
-package tudor.com.calculatorSleek;
+package tudor.com.calculatorSleek.fragments;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import tudor.com.calculatorSleek.android.R;
 
 
 /**
@@ -79,20 +77,8 @@ public class BottomFragment extends Fragment {
 		mButtonModulo = (Button) view.findViewById(R.id.buttonModulo);
 		mButtonFactorial = (Button) view.findViewById(R.id.buttonFactorial);
 		mButtonPower = (Button) view.findViewById(R.id.buttonPower);
-		int sizeMask = (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
-//		if ( sizeMask == Configuration.SCREENLAYOUT_SIZE_LARGE || sizeMask==Configuration.SCREENLAYOUT_SIZE_SMALL
-//				|| sizeMask==Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-//			mButtonOne.setTextSize(50);
-//		}
 		eventsOperators();
 
-		// ads
-//		AdView mAdView = (AdView) view.findViewById(R.id.adView);
-//		AdRequest adRequest = new AdRequest.Builder().addTestDevice(R.string.adTestDevice+"").build();
-//		mAdView.loadAd(adRequest);
-		AdView    mAdView = (AdView) view.findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
 		return view;
 	}
 	private void eventsOperators(){

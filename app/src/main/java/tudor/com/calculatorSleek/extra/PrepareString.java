@@ -1,4 +1,4 @@
-package tudor.com.calculatorSleek;
+package tudor.com.calculatorSleek.extra;
 
 /**
  * Created by Tudor on 21-May-15.

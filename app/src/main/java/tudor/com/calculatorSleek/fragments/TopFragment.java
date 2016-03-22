@@ -1,14 +1,21 @@
-package tudor.com.calculatorSleek;
+package tudor.com.calculatorSleek.fragments;
 
+import android.animation.Animator;
+import android.annotation.TargetApi;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import net.objecthunter.exp4j.Expression;
@@ -18,8 +25,10 @@ import net.objecthunter.exp4j.operator.Operator;
 
 import java.math.BigDecimal;
 
+import tudor.com.calculatorSleek.android.R;
+
 import static java.lang.Double.parseDouble;
-import static tudor.com.calculatorSleek.PrepareString.prepareStringForMathEval;
+import static tudor.com.calculatorSleek.extra.PrepareString.prepareStringForMathEval;
 
 public class TopFragment extends Fragment {
 	private Button mButtonBracketOpen;
@@ -29,14 +38,13 @@ public class TopFragment extends Fragment {
 	private Button mButtonRoot;
 
 	private TextView mTextViewResult;
-	private TextView mTextViewDetail;
+	private EditText mTextViewDetail;
 
 	public TopFragment() {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_top, container, false);
 
 		mButtonBracketOpen = (Button) view.findViewById(R.id.buttonBracketOpen);
@@ -46,13 +54,16 @@ public class TopFragment extends Fragment {
 		mButtonDel = (Button) view.findViewById(R.id.buttonDel);
 
 
-		mTextViewDetail = (TextView) view.findViewById(R.id.textViewDetail);
+		mTextViewDetail = (EditText) view.findViewById(R.id.textViewDetail);
 		mTextViewResult = (TextView) view.findViewById(R.id.textViewResult);
 		mTextViewDetail.setMovementMethod(new LinkMovementMethod());
 		mTextViewResult.setMovementMethod(new LinkMovementMethod());
-		mTextViewResult.requestFocus(); // without these IDK what happens in scrollable textview because it won't display it's contents
+		mTextViewResult
+				.requestFocus(); // without these IDK what happens in scrollable textview because it won't display it's contents
 		mTextViewDetail.requestFocus();
 
+		mTextViewDetail.setRawInputType(InputType.TYPE_NULL);
+//		mTextViewDetail.setFocusable(true);
 		eventsOperators();
 		return view;
 	}
@@ -96,30 +107,22 @@ public class TopFragment extends Fragment {
 					}
 				};
 
-				if (!s.equals("") && s != null && s.matches(".*\\D+.*")) {
+				if (!s.isEmpty() && s.matches(".*\\D+.*")) {
 					Expression expression;
 					try { // try default evaluation
-						expression = new ExpressionBuilder(s)
-								.operator(factorial)
-								.function(log)
-								.function(ln)
-								.build();
-						BigDecimal d = new BigDecimal(expression.evaluate())
-								.setScale(15, BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
-								.stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
+						expression = new ExpressionBuilder(s).operator(factorial).function(log).function(ln).build();
+						BigDecimal d = new BigDecimal(expression.evaluate()).setScale(15,
+																					  BigDecimal.ROUND_HALF_UP) // ROUND_HALF_UP because 6.2 = 6.2
+											   .stripTrailingZeros();// if would be ROUND_UP then 6.2 = 6.20001
 
 						mTextViewResult.setText(d.toPlainString());
 					} catch (IllegalArgumentException | ArithmeticException e) { // if default fails
 						try { // parse the string and try again
 
-							expression = new ExpressionBuilder(prepareStringForMathEval(s))
-									.operator(factorial)
-									.function(log)
-									.function(ln)
-									.build();
-							BigDecimal d = new BigDecimal(expression.evaluate())
-									.setScale(7, BigDecimal.ROUND_HALF_UP)
-									.stripTrailingZeros();
+							expression = new ExpressionBuilder(prepareStringForMathEval(s)).operator(factorial).function(log)
+																						   .function(ln).build();
+							BigDecimal d = new BigDecimal(expression.evaluate()).setScale(7, BigDecimal.ROUND_HALF_UP)
+																				.stripTrailingZeros();
 							mTextViewResult.setText(d.toPlainString());
 
 						} catch (NumberFormatException infinityException) {
@@ -171,14 +174,28 @@ public class TopFragment extends Fragment {
 			}
 		});
 		mButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
+			@TargetApi (Build.VERSION_CODES.LOLLIPOP)
 			@Override
 			public boolean onLongClick(View v) {
-				mTextViewDetail.setText("");
 				mTextViewResult.setText("");
+//				mTextViewDetail.scrollTo(0,0);
+				mTextViewDetail.getText().clear();
+				mTextViewDetail.clearFocus();
+				mTextViewDetail.requestFocus();
+
+				int[] clickCoords = new int[2];
+				mTextViewResult.getLocationOnScreen(clickCoords);
+				Point size = new Point();
+				getActivity().getWindowManager().getDefaultDisplay().getSize(size);
+				int maxRadius = size.y;
+
+				Animator animator = ViewAnimationUtils
+											.createCircularReveal(mTextViewDetail, clickCoords[0], clickCoords[1], 0,
+																  maxRadius);
+				animator.start();
 				return true;
 			}
 		});
-
 
 		mButtonBracketOpen.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -192,6 +209,7 @@ public class TopFragment extends Fragment {
 				setTextView(")");
 			}
 		});
+
 	}
 
 	public void setTextView(String str) {
@@ -252,7 +270,8 @@ public class TopFragment extends Fragment {
 				case '×':
 				case '/':
 				case '÷':
-					mTextViewDetail.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
+					mTextViewDetail
+							.setText(mTextViewDetail.getText().subSequence(0, str.length() - 1) + getString(operator));
 					break;
 				default:
 					mTextViewDetail.setText(mTextViewDetail.getText() + getString(operator));

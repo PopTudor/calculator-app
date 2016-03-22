@@ -8,7 +8,7 @@
     android:layout_weight="5"
     android:focusableInTouchMode="false"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:id="@+id/greenBox1"
@@ -233,21 +233,9 @@
             android:enabled="true"
             android:gravity="center"
             android:text="@string/rand"
-            />
+            android:textSize="26sp"/>
 
     </LinearLayout>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_bottom2"
-        android:layout_weight="0.5"
-        android:background="#000000"
-        >
-    </com.google.android.gms.ads.AdView>
 </LinearLayout>
 

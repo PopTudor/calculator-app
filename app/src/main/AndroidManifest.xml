@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="tudor.com.calculatorSleek"
+    package="tudor.com.calculatorSleek.android"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="2"
-    android:versionName="1.1"
     >
-
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="22"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme.Base">
-        <meta-data android:name="com.google.android.gms.version"
-                   android:value="@integer/google_play_services_version" />
+        android:theme="@style/AppTheme.Base"
+        android:windowSoftInputMode="stateAlwaysHidden"
+
+        >
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="578f43a0aa4a22391ecc912451e1514f1af55ce4"/>
         <activity
-            android:name="tudor.com.calculatorSleek.MainActivity"
+            android:name="tudor.com.calculatorSleek.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-                  android:theme="@android:style/Theme.Translucent" />
     </application>
 
 </manifest>
