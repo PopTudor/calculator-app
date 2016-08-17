@@ -1,4 +1,4 @@
-package tudor.com.calculatorSleek.fragments;
+package tudor.com.calculatorSleek.main;
 
 import android.app.Activity;
 import android.os.Bundle;

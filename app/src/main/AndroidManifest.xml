@@ -18,7 +18,7 @@
             android:name="io.fabric.ApiKey"
             android:value="578f43a0aa4a22391ecc912451e1514f1af55ce4"/>
         <activity
-            android:name="tudor.com.calculatorSleek.activity.MainActivity"
+            android:name="tudor.com.calculatorSleek.main.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

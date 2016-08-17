@@ -1,4 +1,4 @@
-package tudor.com.calculatorSleek.activity;
+package tudor.com.calculatorSleek.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +16,6 @@ import java.util.ArrayList;
 
 import io.fabric.sdk.android.Fabric;
 import tudor.com.calculatorSleek.android.R;
-import tudor.com.calculatorSleek.fragments.BottomFragment;
-import tudor.com.calculatorSleek.fragments.BottomFragment2;
-import tudor.com.calculatorSleek.fragments.TopFragment;
 
 
 public class MainActivity extends FragmentActivity

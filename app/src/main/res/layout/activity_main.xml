@@ -7,7 +7,7 @@
     android:orientation="vertical">
     <fragment
         android:id="@+id/topFragment"
-        class="tudor.com.calculatorSleek.fragments.TopFragment"
+        class="tudor.com.calculatorSleek.main.TopFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="top"
